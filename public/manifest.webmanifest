@@ -1,0 +1,27 @@
+{
+  "id": "/",
+  "name": "Fur Furniture Studio",
+  "short_name": "Fur",
+  "description": "Handcrafted furniture studio specializing in solid hardwood pieces.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "theme_color": "#292524",
+  "background_color": "#FAF8F5",
+  "lang": "en",
+  "icons": [
+    {
+      "src": "/location.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg",
+      "purpose": "any"
+    },
+    {
+      "src": "/location.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg",
+      "purpose": "maskable"
+    }
+  ]
+}

@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fur – Handcrafted Furniture Studio | Honest Materials. Modern Living.</title>
+    <meta name="description" content="Discover Fur, a boutique furniture studio specializing in solid hardwood seating, tables, and bedroom essentials. Handcrafted in Phnom Penh with traditional joinery." />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://fur.studio/" />
+    <meta property="og:title" content="Fur – Handcrafted Furniture Studio | Honest Materials. Modern Living." />
+    <meta property="og:description" content="Handcrafted furniture built for daily living. Solid kiln-dried timber, natural finishes, and architectural proportions." />
+    <meta property="og:image" content="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1200&q=80" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Fur – Handcrafted Furniture Studio" />
+    <meta name="twitter:description" content="Furniture made to be lived with, not just looked at. Solid hardwoods and traditional joinery." />
+    <meta name="twitter:image" content="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1200&q=80" />
+
+    <!-- PWA Meta & Manifest -->
+    <meta name="theme-color" content="#292524" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#121110" media="(prefers-color-scheme: dark)" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Fur" />
+    <meta name="format-detection" content="telephone=no" />
+    
+    <!-- iOS Launch Images (Splash Screens) -->
+    <link rel="apple-touch-startup-image" href="/pwa-512x512.png" />
+    
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="apple-touch-icon" href="/pwa-192x192.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/pwa-192x192.png" />
+    <link rel="icon" type="image/png" sizes="512x512" href="/pwa-512x512.png" />
+
+    <!-- Pre-connect Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Enterprise Self-Healing Deployment Synchronizer (Netlify & Old URL Push Safe) -->
+    <script>
+      (function() {
+        var reloadKey = 'fur_deploy_sync_retry';
+
+        // 1. Clean up temporary cache-busting parameter from URL if present
+        try {
+          if (window.location.search && window.location.search.indexOf('_deploy_sync=') > -1) {
+            var cleanSearch = window.location.search
+              .replace(/[\?&]_deploy_sync=\d+/, '')
+              .replace(/^&/, '?');
+            var cleanUrl = window.location.pathname + (cleanSearch ? ('?' + cleanSearch) : '') + window.location.hash;
+            window.history.replaceState(null, '', cleanUrl);
+          }
+        } catch (e) {}
+
+        // 2. Comprehensive cache purger
+        function purgeAllCachesAndWorkers() {
+          var promises = [];
+          if ('caches' in window) {
+            promises.push(
+              caches.keys().then(function(keys) {
+                return Promise.all(keys.map(function(k) { return caches.delete(k); }));
+              }).catch(function() {})
+            );
+          }
+          if ('serviceWorker' in navigator) {
+            promises.push(
+              navigator.serviceWorker.getRegistrations().then(function(regs) {
+                return Promise.all(regs.map(function(r) { return r.unregister(); }));
+              }).catch(function() {})
+            );
+          }
+          return Promise.all(promises);
+        }
+
+        // 3. Fallback recovery view (guarantees zero blank screen)
+        function renderRecoveryUI(reason) {
+          var root = document.getElementById('root');
+          if (root && (!window.__fur_app_mounted)) {
+            root.innerHTML = 
+              '<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:#FAF8F5;color:#292524;font-family:\'Plus Jakarta Sans\',system-ui,sans-serif;padding:24px;text-align:center;">' +
+                '<div style="max-width:440px;background:#ffffff;padding:36px 32px;border-radius:24px;box-shadow:0 20px 45px rgba(0,0,0,0.06);border:1px solid #e7e5e4;">' +
+                  '<div style="width:48px;height:48px;border-radius:50%;background:#F5F2EB;margin:0 auto 16px;display:flex;align-items:center;justify-content:center;font-size:20px;">🪵</div>' +
+                  '<h2 style="font-size:22px;font-weight:700;margin-bottom:8px;color:#1c1917;font-family:\'Playfair Display\',serif;">Fur Furniture Studio</h2>' +
+                  '<p style="font-size:13px;color:#78716c;line-height:1.6;margin-bottom:24px;">A new build was deployed. We are updating your session with the latest handcrafted catalog.</p>' +
+                  '<div style="display:flex;flex-direction:column;gap:10px;">' +
+                    '<button id="fur-force-sync-btn" style="background:#292524;color:#ffffff;border:none;padding:12px 24px;border-radius:9999px;font-size:13px;font-weight:600;cursor:pointer;transition:transform 0.15s ease;">' +
+                      'Load Latest Studio Version' +
+                    '</button>' +
+                    '<button id="fur-home-sync-btn" style="background:#f5f5f4;color:#44403c;border:1px solid #e7e5e4;padding:11px 24px;border-radius:9999px;font-size:13px;font-weight:600;cursor:pointer;">' +
+                      'Return to Home Catalog' +
+                    '</button>' +
+                  '</div>' +
+                '</div>' +
+              '</div>';
+
+            var forceBtn = document.getElementById('fur-force-sync-btn');
+            if (forceBtn) {
+              forceBtn.onclick = function() {
+                sessionStorage.clear();
+                purgeAllCachesAndWorkers().then(function() {
+                  var sep = window.location.href.indexOf('?') > -1 ? '&' : '?';
+                  window.location.href = window.location.href + sep + '_deploy_sync=' + Date.now();
+                });
+              };
+            }
+
+            var homeBtn = document.getElementById('fur-home-sync-btn');
+            if (homeBtn) {
+              homeBtn.onclick = function() {
+                sessionStorage.clear();
+                purgeAllCachesAndWorkers().then(function() {
+                  window.location.href = '/?_deploy_sync=' + Date.now();
+                });
+              };
+            }
+          }
+        }
+
+        // 4. Stale deployment recovery trigger
+        function recoverFromStaleDeployment(reason) {
+          if (window.__fur_app_mounted) return;
+          var lastRetry = sessionStorage.getItem(reloadKey);
+          var now = Date.now();
+
+          // Auto-recover once cleanly via cache purge & timestamped reload
+          if (!lastRetry || (now - parseInt(lastRetry, 10)) > 15000) {
+            sessionStorage.setItem(reloadKey, String(now));
+            console.warn('[Deployment Sync] Recovering from stale deployment / old URL:', reason);
+
+            purgeAllCachesAndWorkers().then(function() {
+              var sep = window.location.href.indexOf('?') > -1 ? '&' : '?';
+              window.location.href = window.location.href + sep + '_deploy_sync=' + now;
+            }).catch(function() {
+              window.location.reload();
+            });
+          } else {
+            // If already retried within 15 seconds, show interactive recovery UI immediately
+            renderRecoveryUI(reason);
+          }
+        }
+
+        // Catch Vite preload error
+        window.addEventListener('vite:preloadError', function(event) {
+          event.preventDefault();
+          recoverFromStaleDeployment('vite:preloadError');
+        });
+
+        // Catch resource load failures (<script> / <link> 404s) in capture phase
+        window.addEventListener('error', function(event) {
+          var target = event.target || event.srcElement;
+          var isScriptOrLink = target && (target.tagName === 'SCRIPT' || target.tagName === 'LINK');
+          var msg = (event && event.message) ? event.message.toLowerCase() : '';
+
+          if (isScriptOrLink ||
+              msg.indexOf('failed to fetch dynamically imported module') > -1 ||
+              msg.indexOf('loading chunk') > -1 ||
+              msg.indexOf('loading css chunk') > -1 ||
+              msg.indexOf('unexpected token') > -1 ||
+              msg.indexOf('mime type') > -1) {
+            recoverFromStaleDeployment(msg || 'resource load error');
+          }
+        }, true);
+
+        // Catch unhandled rejections that might be dynamic chunk import failures
+        window.addEventListener('unhandledrejection', function(event) {
+          var reason = event.reason ? (event.reason.message || String(event.reason)).toLowerCase() : '';
+          if (reason.indexOf('dynamically imported module') > -1 ||
+              reason.indexOf('loading chunk') > -1 ||
+              reason.indexOf('unexpected token') > -1) {
+            recoverFromStaleDeployment(reason);
+          }
+        });
+
+        // Listen for Service Worker deployment mismatch notice
+        if ('serviceWorker' in navigator) {
+          navigator.serviceWorker.addEventListener('message', function(event) {
+            if (event.data && event.data.type === 'DEPLOYMENT_MISMATCH') {
+              recoverFromStaleDeployment('sw:deployment_mismatch');
+            }
+          });
+
+          // Register service worker proactively
+          navigator.serviceWorker.register('/sw.js', { scope: '/' })
+            .then(function(reg) {
+              reg.update().catch(function() {});
+            })
+            .catch(function(err) {
+              console.log('SW registration notice:', err);
+            });
+        }
+
+        // Clear retry flag on successful application mount
+        window.addEventListener('load', function() {
+          setTimeout(function() {
+            if (window.__fur_app_mounted) {
+              sessionStorage.removeItem(reloadKey);
+            }
+          }, 3000);
+        });
+
+        // Self-healing watchdog: If React has not mounted within 6 seconds, show recovery UI
+        setTimeout(function() {
+          if (!window.__fur_app_mounted) {
+            var root = document.getElementById('root');
+            if (root && root.querySelector('.fur-preloader-text')) {
+              var slowWarning = document.getElementById('fur-slow-network-help');
+              if (slowWarning) slowWarning.style.display = 'block';
+            }
+          }
+        }, 5500);
+
+        // Capture PWA install prompt early
+        window.__pwaDeferredPrompt = null;
+        window.addEventListener('beforeinstallprompt', function(e) {
+          e.preventDefault();
+          window.__pwaDeferredPrompt = e;
+          window.dispatchEvent(new CustomEvent('pwa-prompt-ready'));
+        });
+        window.addEventListener('appinstalled', function() {
+          window.__pwaDeferredPrompt = null;
+          window.dispatchEvent(new CustomEvent('pwa-installed'));
+        });
+      })();
+    </script>
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FurnitureStore",
+      "name": "Fur Furniture Studio",
+      "description": "Boutique furniture studio specializing in handcrafted solid hardwood pieces.",
+      "url": "https://fur.studio",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Phnom Penh",
+        "addressCountry": "KH"
+      },
+      "priceRange": "$$$"
+    }
+    </script>
+  </head>
+  <body class="bg-[#FAF8F5] text-[#292524] transition-colors duration-300 dark:bg-[#121110] dark:text-[#F5F2EB] antialiased">
+    <!-- Guaranteed Pre-Render Shell: Replaced cleanly when React mounts, preventing ANY blank white screen -->
+    <div id="root">
+      <div style="min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #FAF8F5; color: #292524; font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif; padding: 24px; text-align: center;">
+        <div style="max-width: 380px; width: 100%; display: flex; flex-direction: column; align-items: center;">
+          <!-- Studio Brandmark -->
+          <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 20px;">
+            <span style="font-family: 'Playfair Display', Georgia, serif; font-size: 32px; font-weight: 700; letter-spacing: -0.03em; color: #1c1917;">Fur</span>
+            <span style="width: 7px; height: 7px; border-radius: 50%; background: #b45309; display: inline-block; margin-top: 6px;"></span>
+          </div>
+
+          <!-- Pulsing Studio Progress Indicator -->
+          <div style="width: 48px; height: 3px; background: #e7e5e4; border-radius: 9999px; overflow: hidden; margin-bottom: 16px;">
+            <div style="width: 100%; height: 100%; background: #b45309; border-radius: 9999px; animation: furPulse 1.2s infinite ease-in-out;"></div>
+          </div>
+
+          <p class="fur-preloader-text" style="font-size: 13px; font-weight: 500; color: #78716c; letter-spacing: 0.01em; margin: 0;">
+            Handcrafted Furniture Studio • Phnom Penh
+          </p>
+
+          <!-- Automatic Slow Connection / Stale Deployment Helper (Hidden by default, shown if delay > 5.5s) -->
+          <div id="fur-slow-network-help" style="display: none; margin-top: 24px; padding-top: 18px; border-top: 1px solid #e7e5e4; width: 100%;">
+            <p style="font-size: 12px; color: #a8a29e; margin-bottom: 12px;">Taking a moment to synchronize?</p>
+            <div style="display: flex; justify-content: center; gap: 8px;">
+              <button onclick="sessionStorage.clear();if('caches' in window){caches.keys().then(function(k){k.forEach(function(n){caches.delete(n)})});}window.location.reload(true);" style="background: #292524; color: #fff; border: none; padding: 8px 16px; border-radius: 9999px; font-size: 12px; font-weight: 600; cursor: pointer;">
+                Reload Application
+              </button>
+              <button onclick="window.location.href='/'" style="background: #f5f5f4; color: #44403c; border: 1px solid #e7e5e4; padding: 8px 16px; border-radius: 9999px; font-size: 12px; font-weight: 600; cursor: pointer;">
+                Return Home
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <style>
+        @keyframes furPulse {
+          0% { transform: translateX(-100%); }
+          50% { transform: translateX(0%); }
+          100% { transform: translateX(100%); }
+        }
+      </style>
+    </div>
+
+    <!-- Application Entry Module -->
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
