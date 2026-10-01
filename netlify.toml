@@ -4,12 +4,7 @@
 
 [build.environment]
   NODE_VERSION = "20"
-
-# Explicitly return HTTP 404 for missing hashed assets to prevent Netlify serving HTML for JS/CSS files
-[[redirects]]
-  from = "/assets/*"
-  to = "/assets/:splat"
-  status = 404
+  NPM_FLAGS = "--legacy-peer-deps"
 
 # Direct all Single Page App client-side routes to index.html with HTTP 200
 [[redirects]]
@@ -68,4 +63,3 @@
   for = "/assets/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
-

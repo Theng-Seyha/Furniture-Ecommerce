@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Fur Furniture Studio</title>
+  <script>
+    // Single Page App redirect for GitHub Pages, Netlify, and static hosts
+    // Preserves the path and redirects to index.html cleanly
+    (function() {
+      var path = window.location.pathname;
+      var search = window.location.search;
+      var hash = window.location.hash;
+      window.location.replace('/' + (path && path !== '/' ? '#' + path : '') + search + hash);
+    })();
+  </script>
+</head>
+<body style="font-family: system-ui, sans-serif; background: #FAF8F5; color: #292524; display: flex; align-items: center; justify-content: center; min-height: 100vh; margin: 0; text-align: center; padding: 20px;">
+  <div>
+    <h2>Redirecting to Fur Studio...</h2>
+    <p><a href="/" style="color: #b45309; text-decoration: none; font-weight: bold;">Click here if you are not redirected automatically</a></p>
+  </div>
+</body>
+</html>
