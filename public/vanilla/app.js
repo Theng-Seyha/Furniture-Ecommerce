@@ -39,9 +39,7 @@ const PRODUCTS = [
     badge: 'Craftsman Choice',
     image: 'https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?auto=format&fit=crop&w=900&q=80',
     gallery: [
-      'https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?auto=format&fit=crop&w=900&q=80',
-      'https://images.unsplash.com/photo-1577140917170-285929fb55b7?auto=format&fit=crop&w=900&q=80',
-      'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=900&q=80'
+      'https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?auto=format&fit=crop&w=900&q=80'
     ],
     colors: ['Oatmeal Bouclé', 'Charcoal Wool', 'Terracotta Chenille'],
     description: 'Sculpted with a steam-bent solid white oak interior frame and wrapped in tactile nubby bouclé. Generously proportioned for deep conversational relaxation.',
@@ -63,8 +61,7 @@ const PRODUCTS = [
     badge: 'Bestseller',
     image: 'https://images.unsplash.com/photo-1615066390971-03e4e1c36ddf?auto=format&fit=crop&w=900&q=80',
     gallery: [
-      'https://images.unsplash.com/photo-1615066390971-03e4e1c36ddf?auto=format&fit=crop&w=900&q=80',
-      'https://images.unsplash.com/photo-1577140917170-285929fb55b7?auto=format&fit=crop&w=900&q=80'
+      'https://images.unsplash.com/photo-1615066390971-03e4e1c36ddf?auto=format&fit=crop&w=900&q=80'
     ],
     colors: ['Natural American Walnut', 'Smoked Oak', 'Bleached Oak'],
     description: 'Cut from sustainably managed single-slab hardwood planks and joined with butterfly inlays. Seats 8 to 10 guests with generous elbow room.',
@@ -86,8 +83,7 @@ const PRODUCTS = [
     badge: 'Limited Batch',
     image: 'https://images.unsplash.com/photo-1595428774223-ef52624120d2?auto=format&fit=crop&w=900&q=80',
     gallery: [
-      'https://images.unsplash.com/photo-1595428774223-ef52624120d2?auto=format&fit=crop&w=900&q=80',
-      'https://images.unsplash.com/photo-1538688525198-9b88f6f53126?auto=format&fit=crop&w=900&q=80'
+      'https://images.unsplash.com/photo-1595428774223-ef52624120d2?auto=format&fit=crop&w=900&q=80'
     ],
     colors: ['White Oak', 'Ebonized Black Oak'],
     description: 'Slatted sliding tambour doors that conceal integrated cable grommets and adjustable shelving. Perfect for vinyl collections and media equipment.',
@@ -109,7 +105,6 @@ const PRODUCTS = [
     badge: 'Workshop Flagship',
     image: 'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=900&q=80',
     gallery: [
-      'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=900&q=80',
       'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=900&q=80'
     ],
     colors: ['Warm Natural Oak', 'Walnut Stain'],
@@ -130,9 +125,9 @@ const PRODUCTS = [
     inStock: true,
     isSignature: false,
     badge: 'Popular',
-    image: 'https://images.unsplash.com/photo-1533090161767-e6ffed986c88?auto=format&fit=crop&w=900&q=80',
+    image: 'https://images.unsplash.com/photo-1533090481720-856c6e3c1fdc?auto=format&fit=crop&w=900&q=80',
     gallery: [
-      'https://images.unsplash.com/photo-1533090161767-e6ffed986c88?auto=format&fit=crop&w=900&q=80'
+      'https://images.unsplash.com/photo-1533090481720-856c6e3c1fdc?auto=format&fit=crop&w=900&q=80'
     ],
     colors: ['Honed Travertine', 'Nero Marquina Marble'],
     description: 'Heavy architectural monolithic plinth crafted from honed natural stone. Matte non-porous sealant protects against coffee and wine rings.',
@@ -194,7 +189,7 @@ const PRODUCTS = [
     rating: 5.0,
     reviewsCount: 16,
     inStock: true,
-    isSignature: true,
+    isSignature: false,
     badge: 'Luxury Suite',
     image: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=900&q=80',
     gallery: [
@@ -503,11 +498,11 @@ function initEventListeners() {
 
 // 7. PRODUCT FILTERING & SORTING LOGIC (Using Array.prototype methods)
 function getFilteredProducts() {
-  let result = [...PRODUCTS];
+  let result = PRODUCTS.filter(p => !p.isSignature);
 
   // Category filter
   if (state.activeCategory !== 'All') {
-    result = result.filter(p => p.category === state.activeCategory);
+    result = PRODUCTS.filter(p => p.category === state.activeCategory);
   }
 
   // Price Bracket filter
@@ -526,7 +521,7 @@ function getFilteredProducts() {
 
   // Search Query filter
   if (state.searchQuery) {
-    result = result.filter(p => 
+    result = PRODUCTS.filter(p => 
       p.name.toLowerCase().includes(state.searchQuery) ||
       p.materials.toLowerCase().includes(state.searchQuery) ||
       p.description.toLowerCase().includes(state.searchQuery)
@@ -657,6 +652,7 @@ function renderProductModalContent() {
       <div class="main-image-wrap">
         <img id="modal-main-img" src="${p.gallery[0]}" alt="${p.name}">
       </div>
+      ${p.gallery.length > 1 ? `
       <div class="thumbnails-row">
         ${p.gallery.map((imgUrl, i) => `
           <button class="thumb-btn ${i === 0 ? 'active' : ''}" onclick="switchModalGalleryImage('${imgUrl}', this)">
@@ -664,6 +660,7 @@ function renderProductModalContent() {
           </button>
         `).join('')}
       </div>
+      ` : ''}
     </div>
 
     <!-- Right: Product Specifications & Live Calculator -->

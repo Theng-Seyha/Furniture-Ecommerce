@@ -4,9 +4,6 @@ import { ChevronLeft, ChevronRight, Star } from "lucide-react";
 import { TESTIMONIALS } from "../data/furnitureData";
 import { ScrollReveal } from "./ScrollReveal";
 
-const REVIEW_FALLBACK_IMAGE =
-  "https://images.unsplash.com/photo-1616486029423-aaa4789e8c9a?auto=format&fit=crop&w=1200&q=80";
-
 export const CustomerReviews = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const current = TESTIMONIALS[currentIndex];
@@ -104,9 +101,6 @@ export const CustomerReviews = () => {
             <img
               src="https://images.unsplash.com/photo-1616486029423-aaa4789e8c9a?auto=format&fit=crop&w=1200&q=80"
               alt="Cozy styled modern apartment living room furniture"
-              onError={(e) => {
-                e.currentTarget.src = REVIEW_FALLBACK_IMAGE;
-              }}
               className="w-full h-full object-cover object-center transform hover:scale-103 transition-transform duration-700"
             />
             <div className="absolute inset-0 bg-stone-900/10 pointer-events-none" />

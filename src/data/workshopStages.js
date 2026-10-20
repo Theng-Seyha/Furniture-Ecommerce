@@ -19,7 +19,7 @@ export const HANDCRAFTED_STAGES = [
     shortLabel: 'Received',
     icon: ClipboardCheck,
     duration: 'Day 1',
-    image: 'https://images.unsplash.com/photo-1507652313519-d4e9174996dd?auto=format&fit=crop&w=900&q=80',
+    image: 'https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?auto=format&fit=crop&w=900&q=80',
     headline: 'Dimensional Drafting & Workshop Queue Entry',
     description:
       'The studio team enters your dimensions into the bench log. Lead artisan reviews grain continuity, fabric lot matching, and custom specifications before timber pulling begins.',
@@ -38,7 +38,7 @@ export const HANDCRAFTED_STAGES = [
     shortLabel: 'Timber',
     icon: Trees,
     duration: 'Day 1–2',
-    image: 'https://images.unsplash.com/photo-1541123437800-1bb1317badc2?auto=format&fit=crop&w=900&q=80',
+    image: 'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=900&q=80',
     headline: 'FSC Kiln-Dried Hardwood Selection & Moisture Testing',
     description:
       'We hand-select individual Appalachian White Oak and Black Walnut boards. Planks are probed with a digital pin-meter to ensure 8–10% equilibrium moisture content to resist Southeast Asian humidity.',
@@ -57,7 +57,7 @@ export const HANDCRAFTED_STAGES = [
     shortLabel: 'Joinery',
     icon: Hammer,
     duration: 'Day 2–4',
-    image: 'https://images.unsplash.com/photo-1504148455328-c376907d081c?auto=format&fit=crop&w=900&q=80',
+    image: 'https://images.unsplash.com/photo-1517991104123-1d56a6e81ed9?auto=format&fit=crop&w=900&q=80',
     headline: 'Hand Mortise-and-Tenon Interlocking Joinery',
     description:
       'Master joiners cut traditional mortise-and-tenon and wedge joints by hand. No brittle plastic cams or pressed MDF biscuits. The joints lock purely with mechanical timber physics.',
@@ -76,7 +76,7 @@ export const HANDCRAFTED_STAGES = [
     shortLabel: 'Finishing',
     icon: Sparkles,
     duration: 'Day 4–5',
-    image: 'https://images.unsplash.com/photo-1513161455079-7dc1de15ef3e?auto=format&fit=crop&w=900&q=80',
+    image: 'https://images.unsplash.com/photo-1524484485831-a92ffc0de03f?auto=format&fit=crop&w=900&q=80',
     headline: 'Natural Plant Oil & Organic Beeswax Rub',
     description:
       'Three successive layers of organic linseed oil and plant-based hardwax are hand-buffed into the open timber pores. The wood breathes naturally, repelling liquids while allowing future spot-repairs.',
@@ -95,7 +95,7 @@ export const HANDCRAFTED_STAGES = [
     shortLabel: 'Inspection',
     icon: ShieldCheck,
     duration: 'Day 5–6',
-    image: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=900&q=80',
+    image: 'https://images.unsplash.com/photo-1533090481720-856c6e3c1fdc?auto=format&fit=crop&w=900&q=80',
     headline: '18-Point Acoustic Tap & Stress Calibration',
     description:
       'Before packaging, every item undergoes an 18-point verification: structural planar level check, acoustic tap testing for core density, 150kg static weight test, and tactile silkiness inspection.',
@@ -114,7 +114,7 @@ export const HANDCRAFTED_STAGES = [
     shortLabel: 'Delivery',
     icon: Truck,
     duration: 'Day 6–7',
-    image: 'https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=900&q=80',
+    image: 'https://images.unsplash.com/photo-1538688525198-9b88f6f53126?auto=format&fit=crop&w=900&q=80',
     headline: 'White-Glove Blanket-Wrapped Delivery & In-Home Assembly',
     description:
       'Dispatched directly from our Phnom Penh workshop in soft quilted furniture blankets. Our technicians carry the piece inside your home, place it in your desired room, and install felt floor gliders.',

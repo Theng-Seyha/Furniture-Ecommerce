@@ -5,9 +5,6 @@ import { BLOG_POSTS } from "../data/furnitureData";
 import { ScrollReveal } from "./ScrollReveal";
 import { useBodyScrollLock } from "../hooks/useBodyScrollLock";
 
-const BLOG_FALLBACK_IMAGE =
-  "https://images.unsplash.com/photo-1516455590571-18256e5bb9ff?auto=format&fit=crop&w=800&q=80";
-
 export const BlogSection = () => {
   const [activePost, setActivePost] = useState(null);
 
@@ -67,9 +64,6 @@ export const BlogSection = () => {
                 <img
                   src={post.image}
                   alt={post.title}
-                  onError={(e) => {
-                    e.currentTarget.src = BLOG_FALLBACK_IMAGE;
-                  }}
                   className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
                   loading="lazy"
                 />
@@ -153,9 +147,6 @@ export const BlogSection = () => {
                 <img
                   src={activePost.image}
                   alt={activePost.title}
-                  onError={(e) => {
-                    e.currentTarget.src = BLOG_FALLBACK_IMAGE;
-                  }}
                   className="w-full h-full object-cover"
                 />
               </div>

@@ -530,7 +530,7 @@ export const FeaturedProducts = () => {
       </div>
 
       {/* 6. Recently Viewed Shelf (Clean, unobtrusive, helpful) */}
-      <RecentlyViewed />
+      <RecentlyViewed excludeIds={filteredProducts.map((p) => p.id)} />
     </section>
   );
 };

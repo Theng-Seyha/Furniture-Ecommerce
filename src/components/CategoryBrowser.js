@@ -3,9 +3,6 @@ import { CATEGORIES } from "../data/furnitureData";
 import { useCart } from "../context/CartContext";
 import { ScrollReveal } from "./ScrollReveal";
 
-const CATEGORY_FALLBACK_IMAGE =
-  "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=600&q=80";
-
 export const CategoryBrowser = ({ onSelectCategory }) => {
   const { selectedCategory } = useCart();
   return (
@@ -56,9 +53,6 @@ export const CategoryBrowser = ({ onSelectCategory }) => {
                     <img
                       src={cat.image}
                       alt={cat.name}
-                      onError={(e) => {
-                        e.currentTarget.src = CATEGORY_FALLBACK_IMAGE;
-                      }}
                       className="w-full h-full object-cover object-center transform group-hover:scale-110 transition-transform duration-500"
                       loading="lazy"
                     />

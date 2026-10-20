@@ -4,9 +4,6 @@ import { ArrowRight, CheckCircle2, X } from "lucide-react";
 import { ScrollReveal } from "./ScrollReveal";
 import { useBodyScrollLock } from "../hooks/useBodyScrollLock";
 
-const CRAFT_FALLBACK_IMAGE =
-  "https://images.unsplash.com/photo-1517705008128-361805f42e86?auto=format&fit=crop&w=1200&q=80";
-
 export const WhyChooseFur = () => {
   const [showStoryModal, setShowStoryModal] = useState(false);
 
@@ -112,9 +109,6 @@ export const WhyChooseFur = () => {
               <img
                 src="https://images.unsplash.com/photo-1517705008128-361805f42e86?auto=format&fit=crop&w=1200&q=80"
                 alt="Fur furniture craftsmanship and solid hardwood detail"
-                onError={(e) => {
-                  e.currentTarget.src = CRAFT_FALLBACK_IMAGE;
-                }}
                 className="w-full h-full object-cover object-center transform hover:scale-103 transition-transform duration-700"
                 loading="lazy"
               />

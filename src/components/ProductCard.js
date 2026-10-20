@@ -4,9 +4,6 @@ import { Star, Eye, Plus, Heart, Check } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import { useIntersectionObserver } from '../hooks/useIntersectionObserver';
 
-const FALLBACK_PRODUCT_IMAGE =
-  'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=1000&q=80';
-
 /**
  * Reusable Product Card Component
  * Clean, tactile, and responsive with progressive disclosure.
@@ -109,9 +106,8 @@ export const ProductCard = ({
               exit={{ opacity: 0 }}
               transition={{ duration: 0.35 }}
               onLoad={() => setImageLoaded(true)}
-              onError={(e) => {
+              onError={() => {
                 setImageLoaded(true);
-                e.currentTarget.src = FALLBACK_PRODUCT_IMAGE;
               }}
               className={`w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out ${
                 imageLoaded ? 'opacity-100' : 'opacity-0'

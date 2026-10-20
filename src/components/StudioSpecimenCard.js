@@ -4,9 +4,6 @@ import { Layers, ShieldCheck, Ruler, Sparkles, Check, Sun, Moon } from 'lucide-r
 import { useCart } from '../context/CartContext';
 import { ScrollReveal } from './ScrollReveal';
 
-const SPECIMEN_FALLBACK_IMAGE =
-  'https://images.unsplash.com/photo-1546484396-fb3fc6f95f98?auto=format&fit=crop&w=600&q=80';
-
 /**
  * StudioSpecimenCard
  * Architectural Timber & Joinery Laboratory
@@ -48,7 +45,7 @@ export const StudioSpecimenCard = () => {
       durability: 'High Stability (20+ yrs)',
       recommendedCare: 'Wipe with a clean dry microfiber cloth. Avoid harsh ammonia cleaners.',
       image:
-        'https://images.unsplash.com/photo-1538688423619-a81d3f23454b?auto=format&fit=crop&w=600&q=80',
+        'https://images.unsplash.com/photo-1595428774223-ef52624120d2?auto=format&fit=crop&w=600&q=80',
     },
     ash: {
       name: 'Natural Blonde Ash',
@@ -63,7 +60,7 @@ export const StudioSpecimenCard = () => {
       durability: 'Heavy Daily Use (15+ yrs)',
       recommendedCare: 'Diluted natural castile soap in lukewarm water for stubborn marks.',
       image:
-        'https://images.unsplash.com/photo-1505693314120-0d443867891c?auto=format&fit=crop&w=600&q=80',
+        'https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?auto=format&fit=crop&w=600&q=80',
     },
   };
 
@@ -295,9 +292,6 @@ export const StudioSpecimenCard = () => {
                 <img
                   src={current.image}
                   alt={current.name}
-                  onError={(e) => {
-                    e.currentTarget.src = SPECIMEN_FALLBACK_IMAGE;
-                  }}
                   className="w-full h-full object-cover object-center transition-all duration-700 hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-stone-950/60 via-transparent to-transparent pointer-events-none" />

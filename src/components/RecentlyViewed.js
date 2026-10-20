@@ -6,7 +6,7 @@ import { useCart } from '../context/CartContext';
  * Clean & Unobtrusive "Recently Viewed Pieces" Shelf
  * Helps luxury shoppers quickly reference and compare items they inspected.
  */
-export const RecentlyViewed = () => {
+export const RecentlyViewed = ({ excludeIds = [] }) => {
   const {
     recentlyViewedProducts,
     clearRecentlyViewed,
@@ -15,7 +15,11 @@ export const RecentlyViewed = () => {
     addToCart,
   } = useCart();
 
-  if (!recentlyViewedProducts || recentlyViewedProducts.length < 2) {
+  const visibleRecentProducts = (recentlyViewedProducts || []).filter(
+    (p) => !excludeIds.includes(p.id)
+  );
+
+  if (visibleRecentProducts.length < 2) {
     return null;
   }
 
@@ -50,7 +54,7 @@ export const RecentlyViewed = () => {
         {/* Horizontal scrollable row on mobile / clean grid on desktop */}
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-4">
           <AnimatePresence>
-            {recentlyViewedProducts.slice(0, 6).map((product) => (
+            {visibleRecentProducts.slice(0, 6).map((product) => (
               <motion.div
                 key={product.id}
                 layout

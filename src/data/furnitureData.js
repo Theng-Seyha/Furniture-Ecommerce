@@ -8,14 +8,14 @@ export const CATEGORIES = [
     "id": "living",
     "name": "Living Room",
     "itemCount": 4,
-    "image": "https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?auto=format&fit=crop&w=800&q=80",
+    "image": "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=800&q=80",
     "description": "Deep lounge seats, sculpted walnut coffee tables, and tactile linen couches."
   },
   {
     "id": "dining",
     "name": "Dining Room",
     "itemCount": 4,
-    "image": "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=800&q=80",
+    "image": "https://images.unsplash.com/photo-1615066390971-03e4e1c36ddf?auto=format&fit=crop&w=800&q=80",
     "description": "Solid white oak communal tables and ergonomic curved-back spindle chairs."
   },
   {
@@ -29,26 +29,26 @@ export const CATEGORIES = [
     "id": "office",
     "name": "Office",
     "itemCount": 2,
-    "image": "https://images.unsplash.com/photo-1505330622279-bf7d7fc918f4?auto=format&fit=crop&w=800&q=80",
+    "image": "https://images.unsplash.com/photo-1530018607912-eff2daa1bac4?auto=format&fit=crop&w=800&q=80",
     "description": "Focus-forward writing bureaus with hidden cable raceways and solid joinery."
   },
   {
     "id": "storage",
     "name": "Storage",
     "itemCount": 2,
-    "image": "https://images.unsplash.com/photo-1532372576444-dda954194ad0?auto=format&fit=crop&w=800&q=80",
+    "image": "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=800&q=80",
     "description": "Hand-fluted tambour credenzas, slatted sideboards, and modular shelving units."
   },
   {
     "id": "lighting",
     "name": "Lighting",
     "itemCount": 2,
-    "image": "https://images.unsplash.com/photo-1543198126-a8ad8e47fb22?auto=format&fit=crop&w=800&q=80",
+    "image": "https://images.unsplash.com/photo-1540932239986-30128078f3c5?auto=format&fit=crop&w=800&q=80",
     "description": "Spun brass floor lamps, paper lanterns, and warm dimmable illumination."
   }
 ];
 
-const BASE_PRODUCTS = [
+const RAW_BASE_PRODUCTS = [
   {
     "id": "fur-kanso-sofa-1",
     "name": "Kanso Modular Three-Seater",
@@ -64,10 +64,6 @@ const BASE_PRODUCTS = [
     "finish": "Natural Matte Plant-Based Hardwax",
     "leadTime": "24–48 Hours in Phnom Penh",
     "image": "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=1000&q=80",
-    "gallery": [
-      "https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?auto=format&fit=crop&w=1000&q=80",
-      "https://images.unsplash.com/photo-1550581190-9c1c48d21d6c?auto=format&fit=crop&w=1000&q=80"
-    ],
     "colors": [
       {
         "name": "Oatmeal Bouclé",
@@ -108,10 +104,6 @@ const BASE_PRODUCTS = [
     "finish": "Hand-Rubbed Organic Linseed Oil",
     "leadTime": "In Stock (Immediate Dispatch)",
     "image": "https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?auto=format&fit=crop&w=1000&q=80",
-    "gallery": [
-      "https://images.unsplash.com/photo-1581539250439-c96689b516dd?auto=format&fit=crop&w=1000&q=80",
-      "https://images.unsplash.com/photo-1506439773649-6e0eb8cfb237?auto=format&fit=crop&w=1000&q=80"
-    ],
     "colors": [
       {
         "name": "Cognac Saddle",
@@ -151,11 +143,7 @@ const BASE_PRODUCTS = [
     "dimensions": "L 210cm × W 95cm × H 75cm",
     "finish": "Zero-VOC Water-Based Polyx Shield",
     "leadTime": "3–5 Days Handcrafted Batch",
-    "image": "https://images.unsplash.com/photo-1615066390971-03e4e1c36ddf?auto=format&fit=crop&w=1000&q=80",
-    "gallery": [
-      "https://images.unsplash.com/photo-1577140917170-285929fb55b7?auto=format&fit=crop&w=1000&q=80",
-      "https://images.unsplash.com/photo-1604578762246-41134e37f9cc?auto=format&fit=crop&w=1000&q=80"
-    ],
+    "image": "https://images.unsplash.com/photo-1577140917170-285929fb55b7?auto=format&fit=crop&w=1000&q=80",
     "colors": [
       {
         "name": "Natural White Oak",
@@ -190,11 +178,7 @@ const BASE_PRODUCTS = [
     "dimensions": "W 180cm × D 45cm × H 68cm",
     "finish": "Satin Hand-Rubbed Wax",
     "leadTime": "In Stock in Daun Penh Showroom",
-    "image": "https://images.unsplash.com/photo-1595428774223-ef52624120d2?auto=format&fit=crop&w=1000&q=80",
-    "gallery": [
-      "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=1000&q=80",
-      "https://images.unsplash.com/photo-1598928506311-c55ded91a20c?auto=format&fit=crop&w=1000&q=80"
-    ],
+    "image": "https://images.unsplash.com/photo-1604578762246-41134e37f9cc?auto=format&fit=crop&w=1000&q=80",
     "colors": [
       {
         "name": "American Walnut",
@@ -229,11 +213,7 @@ const BASE_PRODUCTS = [
     "dimensions": "Queen (L 215cm × W 168cm × H 88cm) / King Available",
     "finish": "Bleached Ash Protective Oil",
     "leadTime": "24–48 Hours Dispatch",
-    "image": "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1000&q=80",
-    "gallery": [
-      "https://images.unsplash.com/photo-1616046229478-9901c5536a45?auto=format&fit=crop&w=1000&q=80",
-      "https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?auto=format&fit=crop&w=1000&q=80"
-    ],
+    "image": "https://images.unsplash.com/photo-1616046229478-9901c5536a45?auto=format&fit=crop&w=1000&q=80",
     "colors": [
       {
         "name": "Natural Ash",
@@ -269,10 +249,6 @@ const BASE_PRODUCTS = [
     "finish": "Matte Polyurethane Commercial Grade",
     "leadTime": "In Stock",
     "image": "https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?auto=format&fit=crop&w=1000&q=80",
-    "gallery": [
-      "https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=1000&q=80",
-      "https://images.unsplash.com/photo-1540574163026-643ea20ade25?auto=format&fit=crop&w=1000&q=80"
-    ],
     "colors": [
       {
         "name": "Raw Honey Oak",
@@ -308,10 +284,6 @@ const BASE_PRODUCTS = [
     "finish": "Untreated Japanese Mulberry Paper",
     "leadTime": "In Stock",
     "image": "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&w=1000&q=80",
-    "gallery": [
-      "https://images.unsplash.com/photo-1540932239986-30128078f3c5?auto=format&fit=crop&w=1000&q=80",
-      "https://images.unsplash.com/photo-1517991104123-1d56a6e81ed9?auto=format&fit=crop&w=1000&q=80"
-    ],
     "colors": [
       {
         "name": "Natural Parchment",
@@ -342,10 +314,6 @@ const BASE_PRODUCTS = [
     "finish": "Organic Linseed Oil & Beeswax",
     "leadTime": "In Stock",
     "image": "https://images.unsplash.com/photo-1503602642458-232111445657?auto=format&fit=crop&w=1000&q=80",
-    "gallery": [
-      "https://images.unsplash.com/photo-1533090161767-e6ffed986c88?auto=format&fit=crop&w=1000&q=80",
-      "https://images.unsplash.com/photo-1533090481720-856c6e3c1fdc?auto=format&fit=crop&w=1000&q=80"
-    ],
     "colors": [
       {
         "name": "Natural Oak",
@@ -368,7 +336,7 @@ const BASE_PRODUCTS = [
   }
 ];
 
-export const SIGNATURE_PRODUCTS = [
+const RAW_SIGNATURE_PRODUCTS = [
   {
     "id": "fur-travertine-table",
     "name": "Aura Monolithic Travertine Coffee Table",
@@ -383,11 +351,7 @@ export const SIGNATURE_PRODUCTS = [
     "dimensions": "W 120cm × D 70cm × H 36cm",
     "finish": "Penetrating Matte Stone Sealant & Natural Teak Oil",
     "leadTime": "In Stock in Daun Penh Showroom",
-    "image": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1000&q=80",
-    "gallery": [
-      "https://images.unsplash.com/photo-1565793298595-6a879b1d9492?auto=format&fit=crop&w=1000&q=80",
-      "https://images.unsplash.com/photo-1618220179428-22790b461013?auto=format&fit=crop&w=1000&q=80"
-    ],
+    "image": "https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?auto=format&fit=crop&w=1000&q=80",
     "colors": [
       {
         "name": "Navona Cream",
@@ -422,11 +386,7 @@ export const SIGNATURE_PRODUCTS = [
     "dimensions": "W 84cm × D 90cm × H 76cm (Seat Height 41cm)",
     "finish": "Natural Steam-Bent Beech & Textured Linen-Bouclé Blend",
     "leadTime": "24–48 Hours Dispatch",
-    "image": "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=1000&q=80",
-    "gallery": [
-      "https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?auto=format&fit=crop&w=1000&q=80",
-      "https://images.unsplash.com/photo-1592078615290-033ee584e267?auto=format&fit=crop&w=1000&q=80"
-    ],
+    "image": "https://images.unsplash.com/photo-1519947486511-46149fa0a254?auto=format&fit=crop&w=1000&q=80",
     "colors": [
       {
         "name": "Raw Ecru",
@@ -461,11 +421,7 @@ export const SIGNATURE_PRODUCTS = [
     "dimensions": "L 220cm × W 100cm × H 76cm",
     "finish": "Raw Sanded Teak with Cold-Pressed Flaxseed Oil",
     "leadTime": "3–5 Days Handcrafted Batch",
-    "image": "https://images.unsplash.com/photo-1530018607912-eff2daa1bac4?auto=format&fit=crop&w=1000&q=80",
-    "gallery": [
-      "https://images.unsplash.com/photo-1519947486511-46149fa0a254?auto=format&fit=crop&w=1000&q=80",
-      "https://images.unsplash.com/photo-1519961655809-34fa156820ff?auto=format&fit=crop&w=1000&q=80"
-    ],
+    "image": "https://images.unsplash.com/photo-1617806118233-18e1de247200?auto=format&fit=crop&w=1000&q=80",
     "colors": [
       {
         "name": "Golden Honey Teak",
@@ -500,11 +456,7 @@ export const SIGNATURE_PRODUCTS = [
     "dimensions": "W 160cm × D 48cm × H 72cm",
     "finish": "Silky Matte Honed Marble & Deep Charcoal Ash",
     "leadTime": "In Stock (Immediate Dispatch)",
-    "image": "https://images.unsplash.com/photo-1538688525198-9b88f6f53126?auto=format&fit=crop&w=1000&q=80",
-    "gallery": [
-      "https://images.unsplash.com/photo-1594026112284-02bb6f3352fe?auto=format&fit=crop&w=1000&q=80",
-      "https://images.unsplash.com/photo-1527066579998-dbbae57f45ce?auto=format&fit=crop&w=1000&q=80"
-    ],
+    "image": "https://images.unsplash.com/photo-1594026112284-02bb6f3352fe?auto=format&fit=crop&w=1000&q=80",
     "colors": [
       {
         "name": "Ebony & White Marble",
@@ -527,7 +479,7 @@ export const SIGNATURE_PRODUCTS = [
   }
 ];
 
-export const FEATURED_PRODUCTS = [
+const RAW_FEATURED_PRODUCTS = [
   {
     "id": "fur-komorebi-nightstand",
     "name": "Komorebi Floating Bedside Console",
@@ -542,11 +494,7 @@ export const FEATURED_PRODUCTS = [
     "dimensions": "W 52cm × D 38cm × H 32cm",
     "finish": "Satin Hand-Rubbed Walnut Wax",
     "leadTime": "In Stock",
-    "image": "https://images.unsplash.com/photo-1532323544230-7191fd51bc1b?auto=format&fit=crop&w=1000&q=80",
-    "gallery": [
-      "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?auto=format&fit=crop&w=1000&q=80",
-      "https://images.unsplash.com/photo-1617325247661-675ab4b64ae2?auto=format&fit=crop&w=1000&q=80"
-    ],
+    "image": "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?auto=format&fit=crop&w=1000&q=80",
     "colors": [
       {
         "name": "American Walnut",
@@ -581,11 +529,7 @@ export const FEATURED_PRODUCTS = [
     "dimensions": "W 56cm × D 58cm × H 82cm (Seat Height 45cm)",
     "finish": "Natural Blonde Rattan & Protective Teak Wax",
     "leadTime": "In Stock (Immediate Dispatch)",
-    "image": "https://images.unsplash.com/photo-1567016432779-094069958ea5?auto=format&fit=crop&w=1000&q=80",
-    "gallery": [
-      "https://images.unsplash.com/photo-1512212621149-107ffe572d2f?auto=format&fit=crop&w=1000&q=80",
-      "https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?auto=format&fit=crop&w=1000&q=80"
-    ],
+    "image": "https://images.unsplash.com/photo-1506439773649-6e0eb8cfb237?auto=format&fit=crop&w=1000&q=80",
     "colors": [
       {
         "name": "Natural Honey Cane",
@@ -621,10 +565,6 @@ export const FEATURED_PRODUCTS = [
     "finish": "Polished Travertine Slab with Waxed Cast Bronze",
     "leadTime": "3–5 Days Handcrafted Batch",
     "image": "https://images.unsplash.com/photo-1519710164239-da123dc03ef4?auto=format&fit=crop&w=1000&q=80",
-    "gallery": [
-      "https://images.unsplash.com/photo-1540518614846-7ede433c4b49?auto=format&fit=crop&w=1000&q=80",
-      "https://images.unsplash.com/photo-1508253578933-20b529302151?auto=format&fit=crop&w=1000&q=80"
-    ],
     "colors": [
       {
         "name": "Warm Travertine",
@@ -660,10 +600,6 @@ export const FEATURED_PRODUCTS = [
     "finish": "Patinated Brushed Raw Brass & Natural Fibers",
     "leadTime": "In Stock",
     "image": "https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?auto=format&fit=crop&w=1000&q=80",
-    "gallery": [
-      "https://images.unsplash.com/photo-1524484485831-a92ffc0de03f?auto=format&fit=crop&w=1000&q=80",
-      "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=1000&q=80"
-    ],
     "colors": [
       {
         "name": "Aged Brass",
@@ -686,14 +622,7 @@ export const FEATURED_PRODUCTS = [
   }
 ];
 
-// Unified catalog containing all handcrafted products across base, signature, and featured collections
-const RAW_ALL_PRODUCTS = [
-  ...BASE_PRODUCTS,
-  ...SIGNATURE_PRODUCTS,
-  ...FEATURED_PRODUCTS
-];
-
-export const ALL_PRODUCTS = RAW_ALL_PRODUCTS.map((p, idx) => {
+const enrichProduct = (p, idx) => {
   const stockCount = p.stockCount !== undefined ? p.stockCount : ((idx % 3 === 0) ? 3 : 8);
   const inStock = p.inStock !== undefined ? p.inStock : (stockCount > 0);
   const sku = p.sku || `FUR-${p.id.replace(/^(fur|anti)-/, '').toUpperCase()}`;
@@ -735,6 +664,7 @@ export const ALL_PRODUCTS = RAW_ALL_PRODUCTS.map((p, idx) => {
 
   return {
     ...p,
+    gallery: [p.image],
     inStock,
     stockCount,
     sku,
@@ -743,7 +673,16 @@ export const ALL_PRODUCTS = RAW_ALL_PRODUCTS.map((p, idx) => {
     detailedDimensions,
     reviewsList: p.reviewsList || defaultReviews
   };
-});
+};
+
+export const SIGNATURE_PRODUCTS = RAW_SIGNATURE_PRODUCTS.map((p, idx) => enrichProduct(p, idx + 8));
+export const FEATURED_PRODUCTS = RAW_FEATURED_PRODUCTS.map((p, idx) => enrichProduct(p, idx + 12));
+
+export const ALL_PRODUCTS = [
+  ...RAW_BASE_PRODUCTS.map((p, idx) => enrichProduct(p, idx)),
+  ...SIGNATURE_PRODUCTS,
+  ...FEATURED_PRODUCTS
+];
 
 export const TESTIMONIALS = [
   {
@@ -802,7 +741,7 @@ export const BLOG_POSTS = [
     "date": "January 18, 2025",
     "readTime": "3 min read",
     "author": "Master Carver Khem",
-    "image": "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=800&q=80",
+    "image": "https://images.unsplash.com/photo-1550581190-9c1c48d21d6c?auto=format&fit=crop&w=800&q=80",
     "content": [
       "Unlike synthetic polyurethane plastic coatings that seal wood under an impenetrable, un-repairable layer of clear resin, our plant-based hardwax penetrates into the wood pores while allowing the timber to breathe.",
       "A minor scratch or cup ring does not require stripping the entire table down to raw timber. A drop of organic linseed wax buffed with a soft linen cloth cures the surface in minutes.",

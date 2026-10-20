@@ -24,7 +24,8 @@ export const CartProvider = ({ children }) => {
           if (!item) return;
           const targetId = item.product?.id || item.id;
           if (!targetId) return;
-          const matchedProduct = ALL_PRODUCTS.find(p => p.id === targetId) || item.product || item;
+          const matchedProduct = ALL_PRODUCTS.find(p => p.id === targetId);
+          if (!matchedProduct) return;
           const color = item.selectedColor || 'Standard';
           const key = `${matchedProduct.id}-${color}`;
           if (map.has(key)) {
@@ -36,7 +37,7 @@ export const CartProvider = ({ children }) => {
               product: matchedProduct,
               quantity: item.quantity || 1,
               selectedColor: color,
-              selectedImage: item.selectedImage || matchedProduct.image,
+              selectedImage: matchedProduct.image,
               includeAssembly: Boolean(item.includeAssembly)
             });
           }
@@ -68,8 +69,10 @@ export const CartProvider = ({ children }) => {
           if (!p) return;
           const pId = p.id || p.product?.id;
           if (pId) {
-            const fullProduct = ALL_PRODUCTS.find(item => item.id === pId) || p.product || p;
-            map.set(pId, fullProduct);
+            const fullProduct = ALL_PRODUCTS.find(item => item.id === pId);
+            if (fullProduct) {
+              map.set(pId, fullProduct);
+            }
           }
         });
         return Array.from(map.values());

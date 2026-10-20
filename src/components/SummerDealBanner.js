@@ -3,9 +3,6 @@ import { ArrowRight, Tag, Sparkles } from "lucide-react";
 import { useCart } from "../context/CartContext";
 import { ScrollReveal } from "./ScrollReveal";
 
-const DEAL_FALLBACK_IMAGE =
-  "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=1200&q=80";
-
 export const SummerDealBanner = ({ onGrabDeal }) => {
   const { applyPromoCode, showToast } = useCart();
   const handleClaim = () => {
@@ -68,11 +65,8 @@ export const SummerDealBanner = ({ onGrabDeal }) => {
               className="lg:col-span-6 h-72 sm:h-96 lg:h-full relative overflow-hidden"
             >
               <img
-                src="https://images.unsplash.com/photo-1617806118233-18e1de247200?auto=format&fit=crop&w=1200&q=80"
+                src="https://images.unsplash.com/photo-1592078615290-033ee584e267?auto=format&fit=crop&w=1200&q=80"
                 alt="Fur Summer Dining Table & Chairs Special"
-                onError={(e) => {
-                  e.currentTarget.src = DEAL_FALLBACK_IMAGE;
-                }}
                 className="w-full h-full object-cover object-center transform hover:scale-103 transition-transform duration-700"
               />
               <div className="absolute top-4 right-4 bg-white dark:bg-stone-900 border border-stone-200/90 dark:border-stone-750 px-3 py-1.5 rounded-full text-xs font-semibold text-stone-800 dark:text-stone-200 shadow-sm flex items-center gap-1.5">

@@ -1,16 +1,7 @@
-import { ArrowRight, Quote } from "lucide-react";
+import { ArrowRight, Quote, ShieldCheck } from "lucide-react";
 import { ScrollReveal } from "./ScrollReveal";
 
-const AVATAR_FALLBACK =
-  "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80";
-
 export const SocialProofBanner = ({ onReadStories }) => {
-  const avatars = [
-    "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80",
-    "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=120&q=80",
-    "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=120&q=80",
-    "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=120&q=80"
-  ];
   return (
     <section className="py-10 sm:py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -31,18 +22,8 @@ export const SocialProofBanner = ({ onReadStories }) => {
             <div className="mt-10 pt-8 border-t border-stone-700/60">
               <div className="flex flex-wrap items-center justify-between gap-4">
                 <div className="flex items-center gap-3">
-                  <div className="flex -space-x-2.5 overflow-hidden">
-                    {avatars.map((url, i) => (
-                      <img
-                        key={i}
-                        src={url}
-                        alt="Customer portrait"
-                        onError={(e) => {
-                          e.currentTarget.src = AVATAR_FALLBACK;
-                        }}
-                        className="inline-block h-10 w-10 rounded-full ring-2 ring-[#2B231F] object-cover"
-                      />
-                    ))}
+                  <div className="w-10 h-10 rounded-full bg-amber-500/20 border border-amber-400/40 flex items-center justify-center text-amber-400 shrink-0">
+                    <ShieldCheck className="w-5 h-5" />
                   </div>
                   <div className="text-left">
                     <p className="text-sm font-semibold text-white">Furnishing Real Homes</p>
@@ -71,10 +52,6 @@ export const SocialProofBanner = ({ onReadStories }) => {
             <img
               src="https://images.unsplash.com/photo-1544457070-4cd773b4d71e?auto=format&fit=crop&w=1200&q=80"
               alt="Warm handcrafted dining table and chair setting in real home"
-              onError={(e) => {
-                e.currentTarget.src =
-                  "https://images.unsplash.com/photo-1544457070-4cd773b4d71e?auto=format&fit=crop&w=1200&q=80";
-              }}
               className="w-full h-full object-cover object-center transform hover:scale-103 transition-transform duration-700"
             />
             <div className="absolute inset-0 bg-stone-900/15 pointer-events-none" />

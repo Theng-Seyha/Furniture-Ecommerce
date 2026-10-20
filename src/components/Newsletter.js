@@ -5,9 +5,6 @@ import { useCart } from "../context/CartContext";
 import { ScrollReveal } from "./ScrollReveal";
 import { saveNewsletterSubscriber } from "../services/firebase";
 
-const FURNITURE_FALLBACK_IMAGE =
-  "https://images.unsplash.com/photo-1549488344-cbb6c34cf08b?auto=format&fit=crop&w=600&q=80";
-
 export const Newsletter = () => {
   const [email, setEmail] = useState("");
   const [isSubscribed, setIsSubscribed] = useState(false);
@@ -83,9 +80,6 @@ export const Newsletter = () => {
                 <img
                   src="https://images.unsplash.com/photo-1549488344-cbb6c34cf08b?auto=format&fit=crop&w=600&q=80"
                   alt="Handcrafted solid wood accent stool furniture"
-                  onError={(e) => {
-                    e.currentTarget.src = FURNITURE_FALLBACK_IMAGE;
-                  }}
                   className="w-full h-full object-cover rounded-xl"
                 />
               </div>
