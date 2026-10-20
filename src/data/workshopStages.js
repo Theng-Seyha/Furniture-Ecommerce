@@ -19,7 +19,7 @@ export const HANDCRAFTED_STAGES = [
     shortLabel: 'Received',
     icon: ClipboardCheck,
     duration: 'Day 1',
-    image: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=900&q=80',
+    image: 'https://images.unsplash.com/photo-1507652313519-d4e9174996dd?auto=format&fit=crop&w=900&q=80',
     headline: 'Dimensional Drafting & Workshop Queue Entry',
     description:
       'The studio team enters your dimensions into the bench log. Lead artisan reviews grain continuity, fabric lot matching, and custom specifications before timber pulling begins.',
@@ -38,7 +38,7 @@ export const HANDCRAFTED_STAGES = [
     shortLabel: 'Timber',
     icon: Trees,
     duration: 'Day 1–2',
-    image: 'https://images.unsplash.com/photo-1516455590571-18256e5bb9ff?auto=format&fit=crop&w=900&q=80',
+    image: 'https://images.unsplash.com/photo-1541123437800-1bb1317badc2?auto=format&fit=crop&w=900&q=80',
     headline: 'FSC Kiln-Dried Hardwood Selection & Moisture Testing',
     description:
       'We hand-select individual Appalachian White Oak and Black Walnut boards. Planks are probed with a digital pin-meter to ensure 8–10% equilibrium moisture content to resist Southeast Asian humidity.',
@@ -76,7 +76,7 @@ export const HANDCRAFTED_STAGES = [
     shortLabel: 'Finishing',
     icon: Sparkles,
     duration: 'Day 4–5',
-    image: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=900&q=80',
+    image: 'https://images.unsplash.com/photo-1513161455079-7dc1de15ef3e?auto=format&fit=crop&w=900&q=80',
     headline: 'Natural Plant Oil & Organic Beeswax Rub',
     description:
       'Three successive layers of organic linseed oil and plant-based hardwax are hand-buffed into the open timber pores. The wood breathes naturally, repelling liquids while allowing future spot-repairs.',
@@ -114,7 +114,7 @@ export const HANDCRAFTED_STAGES = [
     shortLabel: 'Delivery',
     icon: Truck,
     duration: 'Day 6–7',
-    image: 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=900&q=80',
+    image: 'https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=900&q=80',
     headline: 'White-Glove Blanket-Wrapped Delivery & In-Home Assembly',
     description:
       'Dispatched directly from our Phnom Penh workshop in soft quilted furniture blankets. Our technicians carry the piece inside your home, place it in your desired room, and install felt floor gliders.',

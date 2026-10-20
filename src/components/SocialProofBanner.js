@@ -69,11 +69,11 @@ export const SocialProofBanner = ({ onReadStories }) => {
             className="lg:col-span-6 min-h-[300px] lg:min-h-full bg-stone-300 relative overflow-hidden"
           >
             <img
-              src="https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?auto=format&fit=crop&w=1200&q=80"
-              alt="Warm nightstand lamp and ceramic setting"
+              src="https://images.unsplash.com/photo-1544457070-4cd773b4d71e?auto=format&fit=crop&w=1200&q=80"
+              alt="Warm handcrafted dining table and chair setting in real home"
               onError={(e) => {
                 e.currentTarget.src =
-                  "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=1200&q=80";
+                  "https://images.unsplash.com/photo-1544457070-4cd773b4d71e?auto=format&fit=crop&w=1200&q=80";
               }}
               className="w-full h-full object-cover object-center transform hover:scale-103 transition-transform duration-700"
             />

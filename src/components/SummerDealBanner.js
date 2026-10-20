@@ -75,7 +75,7 @@ export const SummerDealBanner = ({ onGrabDeal }) => {
                 }}
                 className="w-full h-full object-cover object-center transform hover:scale-103 transition-transform duration-700"
               />
-              <div className="absolute top-4 right-4 bg-white/90 dark:bg-stone-900/90 backdrop-blur-xs px-3 py-1.5 rounded-full text-xs font-semibold text-stone-800 dark:text-stone-200 shadow-sm flex items-center gap-1.5">
+              <div className="absolute top-4 right-4 bg-white dark:bg-stone-900 border border-stone-200/90 dark:border-stone-750 px-3 py-1.5 rounded-full text-xs font-semibold text-stone-800 dark:text-stone-200 shadow-sm flex items-center gap-1.5">
                 <Sparkles className="w-3.5 h-3.5 text-amber-600" />
                 Free White-Glove Assembly
               </div>

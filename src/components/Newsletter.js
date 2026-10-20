@@ -3,9 +3,10 @@ import { motion } from "motion/react";
 import { Check, Mail } from "lucide-react";
 import { useCart } from "../context/CartContext";
 import { ScrollReveal } from "./ScrollReveal";
+import { saveNewsletterSubscriber } from "../services/firebase";
 
-const PLANT_FALLBACK_IMAGE =
-  "https://images.unsplash.com/photo-1485955900006-10f4d324d411?auto=format&fit=crop&w=400&q=80";
+const FURNITURE_FALLBACK_IMAGE =
+  "https://images.unsplash.com/photo-1549488344-cbb6c34cf08b?auto=format&fit=crop&w=600&q=80";
 
 export const Newsletter = () => {
   const [email, setEmail] = useState("");
@@ -18,6 +19,7 @@ export const Newsletter = () => {
       return;
     }
     setIsSubscribed(true);
+    saveNewsletterSubscriber(email).catch((err) => console.warn('Newsletter subscribe notice:', err));
     showToast("\u2728 Thank you for subscribing! Check your inbox for $50 off your first purchase.");
   };
   return (
@@ -70,7 +72,7 @@ export const Newsletter = () => {
               )}
             </ScrollReveal>
 
-            {/* Right Decorative Plant with scroll reveal */}
+            {/* Right Decorative Handcrafted Furniture with scroll reveal */}
             <ScrollReveal
               animation="fade-left"
               delay={100}
@@ -79,10 +81,10 @@ export const Newsletter = () => {
             >
               <div className="w-44 h-44 sm:w-52 sm:h-52 rounded-2xl overflow-hidden shadow-sm bg-stone-100 dark:bg-stone-800 p-2">
                 <img
-                  src="https://images.unsplash.com/photo-1485955900006-10f4d324d411?auto=format&fit=crop&w=400&q=80"
-                  alt="Architectural indoor plant"
+                  src="https://images.unsplash.com/photo-1549488344-cbb6c34cf08b?auto=format&fit=crop&w=600&q=80"
+                  alt="Handcrafted solid wood accent stool furniture"
                   onError={(e) => {
-                    e.currentTarget.src = PLANT_FALLBACK_IMAGE;
+                    e.currentTarget.src = FURNITURE_FALLBACK_IMAGE;
                   }}
                   className="w-full h-full object-cover rounded-xl"
                 />

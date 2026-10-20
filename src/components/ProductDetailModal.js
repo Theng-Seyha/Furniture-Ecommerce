@@ -2,12 +2,16 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { X, Star, Check, Plus, Minus, ShieldCheck, Ruler, ArrowRight } from "lucide-react";
 import { useCart } from "../context/CartContext";
+import { useBodyScrollLock } from "../hooks/useBodyScrollLock";
 
 export const ProductDetailModal = () => {
   const { quickViewProduct, setQuickViewProduct, addToCart, navigateToProduct } = useCart();
   const [selectedColor, setSelectedColor] = useState("");
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [quantity, setQuantity] = useState(1);
+
+  // Lock background scroll and freeze page when detail modal is open
+  useBodyScrollLock(Boolean(quickViewProduct));
 
   // Close on Escape key
   useEffect(() => {
@@ -46,12 +50,17 @@ export const ProductDetailModal = () => {
         };
 
         return (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-stone-950/65 backdrop-blur-xs overflow-y-auto overflow-x-hidden">
+          <div 
+            onClick={(e) => {
+              if (e.target === e.currentTarget) setQuickViewProduct(null);
+            }}
+            className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-stone-950/60 dark:bg-black/75 backdrop-blur-md overflow-y-auto overscroll-contain"
+          >
             <motion.div
               initial={{ opacity: 0, scale: 0.95, y: 10 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 10 }}
-              className="bg-white dark:bg-[#181614] max-w-3xl w-full max-h-[92vh] overflow-y-auto overflow-x-hidden rounded-3xl p-5 sm:p-7 shadow-2xl border border-stone-200 dark:border-stone-800 relative text-stone-900 dark:text-stone-100 flex flex-col"
+              className="bg-white dark:bg-[#181614] max-w-3xl w-full max-h-[90vh] overflow-y-auto overscroll-contain rounded-3xl p-5 sm:p-7 shadow-2xl border border-stone-200 dark:border-stone-800 relative text-stone-900 dark:text-stone-100 flex flex-col"
             >
               {/* Dedicated Top Modal Header - Keeps Cross Button (X) completely clean and separated out of the text */}
               <div className="flex items-center justify-between pb-3.5 mb-4 sm:mb-5 border-b border-stone-100 dark:border-stone-800/80 shrink-0">

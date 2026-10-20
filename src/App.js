@@ -37,7 +37,6 @@ import { OrderStatusTracking } from './components/OrderStatusTracking';
 import { TrackOrderModal } from './components/TrackOrderModal';
 import { MyOrdersModal } from './components/MyOrdersModal';
 import { Send, ArrowLeft } from 'lucide-react';
-import { OfflineIndicator, SmartInstallBanner } from './components/PWAControls';
 
 /**
  * Main Layout Shell
@@ -87,10 +86,6 @@ const MainLayout = () => {
 
   return (
     <div className="min-h-screen bg-[#FAF8F5] text-stone-900 dark:bg-[#121110] dark:text-[#F5F2EB] flex flex-col font-sans transition-colors duration-300 w-full">
-      {/* 1. Global Status Indicators */}
-      <OfflineIndicator />
-      <SmartInstallBanner />
-      
       {/* Top Navigation Bar */}
       <Navbar onNavigate={handleNavigate} />
 

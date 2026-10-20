@@ -1,7 +1,7 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
-    // 1. Master Deny-All
+    // 1. Master Deny-All fallback
     match /{document=**} {
       allow read, write: if false;
     }
@@ -13,35 +13,46 @@ service cloud.firestore {
     function existing() { return resource.data; }
     function isValidId(id) { return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$'); }
 
-    // Internship Application Validation
-    function isValidApplication(data) {
-      return data.keys().hasAll(['fullname', 'email', 'status', 'ref', 'createdAt', 'updatedAt']) &&
-             data.keys().hasOnly(['fullname', 'email', 'phone', 'university', 'github', 'skills', 'motivation', 'status', 'ref', 'createdAt', 'updatedAt']) &&
-             data.fullname is string && data.fullname.size() <= 100 &&
-             data.email is string && data.email.size() <= 150 &&
-             data.status in ['Received', 'Under Review', 'Scheduled for Interview', 'Rejected', 'Accepted'] &&
-             data.ref is string && data.ref.matches('^INT-\\d{6}$') &&
-             data.createdAt == request.time &&
-             data.updatedAt == request.time;
+    // Orders Collection
+    match /orders/{orderId} {
+      // Allow customers to place orders with valid payloads
+      allow create: if isValidId(orderId) &&
+                    incoming().keys().hasAll(['orderId', 'customerName', 'phoneNumber', 'address', 'total']) &&
+                    incoming().orderId is string && incoming().orderId.size() <= 64 &&
+                    incoming().customerName is string && incoming().customerName.size() <= 100 &&
+                    incoming().phoneNumber is string && incoming().phoneNumber.size() <= 30 &&
+                    incoming().address is string && incoming().address.size() <= 300 &&
+                    incoming().total is number && incoming().total >= 0;
+      // Allow customers to look up an individual order by its exact ID for tracking
+      allow get: if true;
+      // Admin can list, inspect, and update order progress/logs
+      allow list, update, delete: if isAdmin();
     }
 
-    match /internship_applications/{applicationId} {
-      allow create: if isValidId(applicationId) && isValidApplication(incoming());
-      
-      // Admin can manage applications
-      allow read, list: if isAdmin();
-      allow update: if isAdmin() && 
-                    isValidApplication(incoming()) && 
-                    incoming().createdAt == existing().createdAt &&
-                    incoming().updatedAt == request.time;
-      allow delete: if isAdmin();
+    // Studio & Workshop Inquiries
+    match /inquiries/{inquiryId} {
+      allow create: if isValidId(inquiryId) &&
+                    incoming().keys().hasAll(['name', 'emailOrPhone', 'message']) &&
+                    incoming().name is string && incoming().name.size() <= 100 &&
+                    incoming().emailOrPhone is string && incoming().emailOrPhone.size() <= 150 &&
+                    incoming().message is string && incoming().message.size() <= 2000;
+      allow read, list, update, delete: if isAdmin();
     }
 
-    // Monitoring Rules
+    // Newsletter Subscribers
+    match /newsletter_subscribers/{subscriberId} {
+      allow create: if isValidId(subscriberId) &&
+                    incoming().keys().hasAll(['email']) &&
+                    incoming().email is string && incoming().email.size() <= 150;
+      allow read, list, delete: if isAdmin();
+    }
+
+    // Runtime Error Logging
     match /runtime_errors/{errorId} {
-      allow create: if isValidId(errorId) && 
-                    incoming().keys().hasAll(['message', 'timestamp', 'severity']) &&
-                    incoming().timestamp == request.time;
+      allow create: if isValidId(errorId) &&
+                    incoming().keys().hasAll(['message', 'severity']) &&
+                    incoming().message is string &&
+                    incoming().severity is string;
       allow read, list, delete: if isAdmin();
     }
   }

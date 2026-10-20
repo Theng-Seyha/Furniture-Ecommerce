@@ -5,7 +5,7 @@ import { TESTIMONIALS } from "../data/furnitureData";
 import { ScrollReveal } from "./ScrollReveal";
 
 const REVIEW_FALLBACK_IMAGE =
-  "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=1200&q=80";
+  "https://images.unsplash.com/photo-1616486029423-aaa4789e8c9a?auto=format&fit=crop&w=1200&q=80";
 
 export const CustomerReviews = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -32,7 +32,7 @@ export const CustomerReviews = () => {
                   Customer Testimonial
                 </span>
                 <div className="flex items-center gap-1">
-                  {[...Array(current.rating)].map((_, i) => (
+                  {[...Array(Math.max(1, Math.min(5, Math.round(current?.rating || 5))))].map((_, i) => (
                     <Star key={i} className="w-4 h-4 fill-amber-400 text-amber-400" />
                   ))}
                 </div>
@@ -102,8 +102,8 @@ export const CustomerReviews = () => {
             className="lg:col-span-6 min-h-[300px] lg:min-h-full bg-stone-200 relative overflow-hidden"
           >
             <img
-              src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=1200&q=80"
-              alt="Cozy styled modern apartment living room"
+              src="https://images.unsplash.com/photo-1616486029423-aaa4789e8c9a?auto=format&fit=crop&w=1200&q=80"
+              alt="Cozy styled modern apartment living room furniture"
               onError={(e) => {
                 e.currentTarget.src = REVIEW_FALLBACK_IMAGE;
               }}

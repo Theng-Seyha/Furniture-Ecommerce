@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { 
   X, 
@@ -18,6 +18,7 @@ import {
 } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import { TELEGRAM_CONFIG } from '../services/telegramService';
+import { useBodyScrollLock } from '../hooks/useBodyScrollLock';
 
 export const MyOrdersModal = () => {
   const {
@@ -33,6 +34,19 @@ export const MyOrdersModal = () => {
   const [selectedOrder, setSelectedOrder] = useState(null);
   const [showConfirmClear, setShowConfirmClear] = useState(false);
 
+  // Lock background scroll when orders modal is open
+  useBodyScrollLock(Boolean(isOrdersModalOpen));
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape' && isOrdersModalOpen) {
+        setIsOrdersModalOpen(false);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isOrdersModalOpen, setIsOrdersModalOpen]);
+
   const handleTrackInPipeline = (orderId) => {
     setIsOrdersModalOpen(false);
     navigateTo('tracking');
@@ -44,12 +58,17 @@ export const MyOrdersModal = () => {
   return (
     <AnimatePresence>
       {isOrdersModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-stone-950/65 backdrop-blur-xs overflow-y-auto">
+        <div
+          onClick={(e) => {
+            if (e.target === e.currentTarget) setIsOrdersModalOpen(false);
+          }}
+          className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-stone-950/60 dark:bg-black/75 backdrop-blur-md overflow-y-auto overscroll-contain"
+        >
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.95 }}
-            className="bg-[#FAF8F5] dark:bg-[#161412] text-stone-900 dark:text-stone-100 max-w-2xl w-full max-h-[90vh] overflow-hidden rounded-3xl shadow-2xl border border-stone-200 dark:border-stone-800 flex flex-col relative"
+            className="bg-[#FAF8F5] dark:bg-[#161412] text-stone-900 dark:text-stone-100 max-w-2xl w-full max-h-[90vh] overflow-hidden overscroll-contain rounded-3xl shadow-2xl border border-stone-200 dark:border-stone-800 flex flex-col relative"
           >
         {/* Modal Header */}
         <div className="p-5 sm:p-6 border-b border-stone-200/80 dark:border-stone-800/80 flex items-center justify-between bg-white dark:bg-stone-900 shrink-0">
@@ -123,7 +142,7 @@ export const MyOrdersModal = () => {
         </AnimatePresence>
 
         {/* Modal Body */}
-        <div className="grow overflow-y-auto p-4 sm:p-6 space-y-4">
+        <div className="grow overflow-y-auto overscroll-contain p-4 sm:p-6 space-y-4">
           {savedOrders.length === 0 ? (
             <div className="py-16 text-center flex flex-col items-center justify-center">
               <div className="w-16 h-16 rounded-full bg-stone-200 dark:bg-stone-800 flex items-center justify-center text-stone-400 dark:text-stone-500 mb-4">

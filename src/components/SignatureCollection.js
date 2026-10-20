@@ -31,7 +31,7 @@ export const SignatureCollection = ({ onViewAll }) => {
               Signature Artifacts.
             </h2>
             <p className="text-sm text-stone-500 dark:text-stone-400 mt-3 leading-relaxed">
-              Tested daily in our workshop. Solid kiln-dried oak, natural plant wax, and dense fabrics made for honest living.
+              Tested daily in our workshop. Monolithic travertine, reclaimed teak, steam-bent timber, and honed marble made for honest living.
             </p>
           </div>
 

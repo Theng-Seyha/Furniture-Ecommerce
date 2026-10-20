@@ -3,7 +3,7 @@
  * Guarantees zero stale chunk locks and prevents blank white screens on Netlify
  */
 
-const CACHE_NAME = 'fur-studio-v3';
+const CACHE_NAME = 'fur-studio-v6';
 const STATIC_ASSETS = [
   '/manifest.webmanifest',
   '/manifest.json',
@@ -60,6 +60,18 @@ self.addEventListener('fetch', (event) => {
   if (event.request.method !== 'GET') return;
 
   const url = new URL(event.request.url);
+
+  // NEVER intercept or cache Vite development runtime scripts, node_modules, source files, or internal deps
+  if (
+    url.pathname.startsWith('/@') ||
+    url.pathname.startsWith('/node_modules/') ||
+    url.pathname.startsWith('/src/') ||
+    url.pathname.includes('vite') ||
+    url.search.includes('v=') ||
+    (url.pathname.endsWith('.js') && !url.pathname.startsWith('/assets/'))
+  ) {
+    return;
+  }
 
   // 1. Navigation requests (HTML pages on any URL): ALWAYS Network-First
   // This guarantees fresh index.html with current build JS/CSS hashes on Netlify

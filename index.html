@@ -3,14 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Fur – Handcrafted Furniture Studio | Honest Materials. Modern Living.</title>
-    <meta name="description" content="Discover Fur, a boutique furniture studio specializing in solid hardwood seating, tables, and bedroom essentials. Handcrafted in Phnom Penh with traditional joinery." />
+    <title>Final Fur - Modern Furniture | Crafted for Comfort. Made for Life.</title>
+    <meta name="description" content="Crafted for Comfort. Made for Life. Modern luxury furniture with persistent cart, dark mode, and direct Telegram bot integration." />
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://fur.studio/" />
-    <meta property="og:title" content="Fur – Handcrafted Furniture Studio | Honest Materials. Modern Living." />
-    <meta property="og:description" content="Handcrafted furniture built for daily living. Solid kiln-dried timber, natural finishes, and architectural proportions." />
+    <meta property="og:title" content="Final Fur - Modern Furniture | Crafted for Comfort. Made for Life." />
+    <meta property="og:description" content="Crafted for Comfort. Made for Life. Modern luxury furniture with persistent cart, dark mode, and direct Telegram bot integration." />
     <meta property="og:image" content="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1200&q=80" />
 
     <!-- Twitter -->
@@ -161,7 +161,11 @@
               msg.indexOf('loading chunk') > -1 ||
               msg.indexOf('loading css chunk') > -1 ||
               msg.indexOf('unexpected token') > -1 ||
-              msg.indexOf('mime type') > -1) {
+              msg.indexOf('mime type') > -1 ||
+              msg.indexOf('invalid hook call') > -1 ||
+              msg.indexOf("reading 'usestate'") > -1 ||
+              msg.indexOf("reading 'usecontext'") > -1 ||
+              msg.indexOf("reading 'useeffect'") > -1) {
             recoverFromStaleDeployment(msg || 'resource load error');
           }
         }, true);
@@ -171,7 +175,9 @@
           var reason = event.reason ? (event.reason.message || String(event.reason)).toLowerCase() : '';
           if (reason.indexOf('dynamically imported module') > -1 ||
               reason.indexOf('loading chunk') > -1 ||
-              reason.indexOf('unexpected token') > -1) {
+              reason.indexOf('unexpected token') > -1 ||
+              reason.indexOf('invalid hook call') > -1 ||
+              reason.indexOf("reading 'usestate'") > -1) {
             recoverFromStaleDeployment(reason);
           }
         });
@@ -245,7 +251,7 @@
     }
     </script>
   </head>
-  <body class="bg-[#FAF8F5] text-[#292524] transition-colors duration-300 dark:bg-[#121110] dark:text-[#F5F2EB] antialiased">
+  <body class="bg-[#FAF8F5] text-[#292524] transition-colors duration-300 dark:bg-[#121110] dark:text-[#F5F2EB] antialiased overflow-x-hidden">
     <!-- Guaranteed Pre-Render Shell: Replaced cleanly when React mounts, preventing ANY blank white screen -->
     <div id="root">
       <div style="min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #FAF8F5; color: #292524; font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif; padding: 24px; text-align: center;">

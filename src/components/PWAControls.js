@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { usePWAInstall } from '../hooks/usePWAInstall';
+import { useBodyScrollLock } from '../hooks/useBodyScrollLock';
 import { 
   Download, 
   X, 
@@ -58,7 +59,7 @@ export const PWAInstallButton = () => {
         id="navbar-pwa-install-btn"
         aria-label="Install Fur Web App"
         title="Install Fur App to your device"
-        className="navbar-radius-morph navbar-glow-hover group relative flex items-center p-2 sm:px-3 sm:py-1.5 rounded-xl hover:rounded-2xl bg-amber-800 hover:bg-amber-900 text-white text-[11px] sm:text-xs font-semibold shadow-xs hover:shadow-sm cursor-pointer border border-amber-700/80"
+        className="navbar-radius-morph navbar-glow-hover group relative flex items-center p-2 sm:px-3 sm:py-1.5 rounded-xl bg-amber-800 hover:bg-amber-900 text-white text-[11px] sm:text-xs font-semibold shadow-xs hover:shadow-sm cursor-pointer border border-amber-700/80 active:scale-95 transition-all"
       >
         <Download className="w-3.5 h-3.5 text-amber-200 transition-transform group-hover:translate-y-0.5" />
         <span className="hidden xl:inline ml-1.5 whitespace-nowrap tracking-tight text-[10px] uppercase font-bold">Install App</span>
@@ -99,7 +100,7 @@ export const MobilePWAInstallItem = () => {
       <button
         type="button"
         onClick={handleClick}
-        className="navbar-radius-morph relative overflow-hidden flex items-center justify-between w-full py-2.5 px-4 rounded-xl hover:rounded-2xl bg-amber-700 hover:bg-amber-800 text-white text-xs font-semibold shadow-xs cursor-pointer active:scale-97"
+        className="side-menu-item relative flex items-center justify-between w-full py-2.5 px-4 rounded-xl bg-amber-700 hover:bg-amber-800 active:bg-amber-900 text-white text-xs font-semibold shadow-xs cursor-pointer active:scale-97 transition-all"
         id="mobile-drawer-pwa-install-btn"
       >
         <span className="flex items-center gap-2">
@@ -126,34 +127,30 @@ export const MobilePWAInstallItem = () => {
  * Comprehensive PWA Install Guide Modal
  */
 export const PWAInstallModal = ({ isOpen, onClose, platform, isInstallable, onDirectInstall }) => {
+  // Lock background scroll when PWA install guide modal is open
+  useBodyScrollLock(Boolean(isOpen));
+
   useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = 'hidden';
-      // Disable pull-to-refresh when modal is open
-      document.body.style.overscrollBehavior = 'none';
-    } else {
-      document.body.style.overflow = 'unset';
-      document.body.style.overscrollBehavior = 'auto';
-    }
-    return () => {
-      document.body.style.overflow = 'unset';
-      document.body.style.overscrollBehavior = 'auto';
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape' && isOpen) onClose();
     };
-  }, [isOpen]);
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen, onClose]);
 
   if (!isOpen) return null;
 
   return (
     <AnimatePresence>
       <div 
-        className="fixed inset-0 z-[120] flex items-center justify-center p-6"
+        className="fixed inset-0 z-[120] flex items-center justify-center p-4 sm:p-6 overflow-y-auto overscroll-contain"
       >
-        {/* Subtle backdrop - clicking here closes */}
+        {/* Blurred & locked backdrop - clicking here closes */}
         <motion.div 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="absolute inset-0 bg-stone-900/30 backdrop-blur-xs cursor-pointer"
+          className="fixed inset-0 bg-stone-950/60 dark:bg-black/75 backdrop-blur-md cursor-pointer"
           onClick={onClose}
         />
 
@@ -162,7 +159,7 @@ export const PWAInstallModal = ({ isOpen, onClose, platform, isInstallable, onDi
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 20 }}
           transition={{ duration: 0.3, ease: "easeOut" }}
-          className="relative w-full max-w-[380px] bg-white dark:bg-stone-900 rounded-[2rem] p-6 sm:p-8 shadow-2xl border border-stone-100 dark:border-stone-800 text-stone-900 dark:text-stone-100 my-auto overflow-hidden"
+          className="relative w-full max-w-[380px] max-h-[90vh] overflow-y-auto overscroll-contain bg-white dark:bg-stone-900 rounded-[2rem] p-6 sm:p-8 shadow-2xl border border-stone-100 dark:border-stone-800 text-stone-900 dark:text-stone-100 my-auto"
           onClick={(e) => e.stopPropagation()}
         >
           {/* Top-Right Close Button */}
@@ -309,7 +306,7 @@ export const SmartInstallBanner = () => {
             transition={{ type: "spring", damping: 20, stiffness: 150 }}
             className="fixed bottom-24 left-4 right-4 sm:left-auto sm:right-8 sm:w-[400px] z-40"
           >
-            <div className="bg-white/95 dark:bg-stone-900/95 backdrop-blur-xl rounded-[2.5rem] p-6 shadow-[0_20px_50px_rgba(0,0,0,0.15)] border border-stone-200 dark:border-stone-800 flex items-center gap-5">
+            <div className="bg-white dark:bg-stone-900 rounded-[2.5rem] p-6 shadow-[0_20px_50px_rgba(0,0,0,0.15)] border border-stone-200 dark:border-stone-800 flex items-center gap-5">
               <div className="w-16 h-16 rounded-[1.25rem] bg-amber-800 shrink-0 overflow-hidden shadow-xl border-2 border-white dark:border-stone-800">
                 <img src="/pwa-192x192.png" alt="App Icon" className="w-full h-full object-cover" />
               </div>

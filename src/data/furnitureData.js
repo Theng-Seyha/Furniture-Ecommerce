@@ -7,48 +7,48 @@ export const CATEGORIES = [
   {
     "id": "living",
     "name": "Living Room",
-    "itemCount": 8,
-    "image": "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=600&q=80",
+    "itemCount": 4,
+    "image": "https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?auto=format&fit=crop&w=800&q=80",
     "description": "Deep lounge seats, sculpted walnut coffee tables, and tactile linen couches."
   },
   {
     "id": "dining",
     "name": "Dining Room",
-    "itemCount": 6,
-    "image": "https://images.unsplash.com/photo-1615066390971-03e4e1c36ddf?auto=format&fit=crop&w=600&q=80",
+    "itemCount": 4,
+    "image": "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=800&q=80",
     "description": "Solid white oak communal tables and ergonomic curved-back spindle chairs."
   },
   {
     "id": "bedroom",
     "name": "Bedroom",
-    "itemCount": 5,
-    "image": "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=800&q=80",
+    "itemCount": 2,
+    "image": "https://images.unsplash.com/photo-1598928636135-d146006ff4be?auto=format&fit=crop&w=800&q=80",
     "description": "Low-profile platform timber beds and quiet bedside floating ledges."
   },
   {
     "id": "office",
     "name": "Office",
-    "itemCount": 4,
-    "image": "https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?auto=format&fit=crop&w=600&q=80",
+    "itemCount": 2,
+    "image": "https://images.unsplash.com/photo-1505330622279-bf7d7fc918f4?auto=format&fit=crop&w=800&q=80",
     "description": "Focus-forward writing bureaus with hidden cable raceways and solid joinery."
   },
   {
     "id": "storage",
     "name": "Storage",
-    "itemCount": 5,
-    "image": "https://images.unsplash.com/photo-1595428774223-ef52624120d2?auto=format&fit=crop&w=600&q=80",
+    "itemCount": 2,
+    "image": "https://images.unsplash.com/photo-1532372576444-dda954194ad0?auto=format&fit=crop&w=800&q=80",
     "description": "Hand-fluted tambour credenzas, slatted sideboards, and modular shelving units."
   },
   {
     "id": "lighting",
     "name": "Lighting",
-    "itemCount": 4,
-    "image": "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&w=600&q=80",
+    "itemCount": 2,
+    "image": "https://images.unsplash.com/photo-1543198126-a8ad8e47fb22?auto=format&fit=crop&w=800&q=80",
     "description": "Spun brass floor lamps, paper lanterns, and warm dimmable illumination."
   }
 ];
 
-export const ALL_PRODUCTS = [
+const BASE_PRODUCTS = [
   {
     "id": "fur-kanso-sofa-1",
     "name": "Kanso Modular Three-Seater",
@@ -65,9 +65,8 @@ export const ALL_PRODUCTS = [
     "leadTime": "24–48 Hours in Phnom Penh",
     "image": "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=1000&q=80",
     "gallery": [
-      "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=1000&q=80",
       "https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?auto=format&fit=crop&w=1000&q=80",
-      "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=1000&q=80"
+      "https://images.unsplash.com/photo-1550581190-9c1c48d21d6c?auto=format&fit=crop&w=1000&q=80"
     ],
     "colors": [
       {
@@ -110,8 +109,8 @@ export const ALL_PRODUCTS = [
     "leadTime": "In Stock (Immediate Dispatch)",
     "image": "https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?auto=format&fit=crop&w=1000&q=80",
     "gallery": [
-      "https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?auto=format&fit=crop&w=1000&q=80",
-      "https://images.unsplash.com/photo-1577140917170-285929fb55b7?auto=format&fit=crop&w=1000&q=80"
+      "https://images.unsplash.com/photo-1581539250439-c96689b516dd?auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1506439773649-6e0eb8cfb237?auto=format&fit=crop&w=1000&q=80"
     ],
     "colors": [
       {
@@ -154,8 +153,8 @@ export const ALL_PRODUCTS = [
     "leadTime": "3–5 Days Handcrafted Batch",
     "image": "https://images.unsplash.com/photo-1615066390971-03e4e1c36ddf?auto=format&fit=crop&w=1000&q=80",
     "gallery": [
-      "https://images.unsplash.com/photo-1615066390971-03e4e1c36ddf?auto=format&fit=crop&w=1000&q=80",
-      "https://images.unsplash.com/photo-1577140917170-285929fb55b7?auto=format&fit=crop&w=1000&q=80"
+      "https://images.unsplash.com/photo-1577140917170-285929fb55b7?auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1604578762246-41134e37f9cc?auto=format&fit=crop&w=1000&q=80"
     ],
     "colors": [
       {
@@ -193,8 +192,8 @@ export const ALL_PRODUCTS = [
     "leadTime": "In Stock in Daun Penh Showroom",
     "image": "https://images.unsplash.com/photo-1595428774223-ef52624120d2?auto=format&fit=crop&w=1000&q=80",
     "gallery": [
-      "https://images.unsplash.com/photo-1595428774223-ef52624120d2?auto=format&fit=crop&w=1000&q=80",
-      "https://images.unsplash.com/photo-1538688525198-9b88f6f53126?auto=format&fit=crop&w=1000&q=80"
+      "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1598928506311-c55ded91a20c?auto=format&fit=crop&w=1000&q=80"
     ],
     "colors": [
       {
@@ -232,8 +231,8 @@ export const ALL_PRODUCTS = [
     "leadTime": "24–48 Hours Dispatch",
     "image": "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1000&q=80",
     "gallery": [
-      "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1000&q=80",
-      "https://images.unsplash.com/photo-1616046229478-9901c5536a45?auto=format&fit=crop&w=1000&q=80"
+      "https://images.unsplash.com/photo-1616046229478-9901c5536a45?auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?auto=format&fit=crop&w=1000&q=80"
     ],
     "colors": [
       {
@@ -271,8 +270,8 @@ export const ALL_PRODUCTS = [
     "leadTime": "In Stock",
     "image": "https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?auto=format&fit=crop&w=1000&q=80",
     "gallery": [
-      "https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?auto=format&fit=crop&w=1000&q=80",
-      "https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=1000&q=80"
+      "https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1540574163026-643ea20ade25?auto=format&fit=crop&w=1000&q=80"
     ],
     "colors": [
       {
@@ -310,8 +309,8 @@ export const ALL_PRODUCTS = [
     "leadTime": "In Stock",
     "image": "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&w=1000&q=80",
     "gallery": [
-      "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&w=1000&q=80",
-      "https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?auto=format&fit=crop&w=1000&q=80"
+      "https://images.unsplash.com/photo-1540932239986-30128078f3c5?auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1517991104123-1d56a6e81ed9?auto=format&fit=crop&w=1000&q=80"
     ],
     "colors": [
       {
@@ -344,8 +343,8 @@ export const ALL_PRODUCTS = [
     "leadTime": "In Stock",
     "image": "https://images.unsplash.com/photo-1503602642458-232111445657?auto=format&fit=crop&w=1000&q=80",
     "gallery": [
-      "https://images.unsplash.com/photo-1503602642458-232111445657?auto=format&fit=crop&w=1000&q=80",
-      "https://images.unsplash.com/photo-1533090161767-e6ffed986c88?auto=format&fit=crop&w=1000&q=80"
+      "https://images.unsplash.com/photo-1533090161767-e6ffed986c88?auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1533090481720-856c6e3c1fdc?auto=format&fit=crop&w=1000&q=80"
     ],
     "colors": [
       {
@@ -371,321 +370,182 @@ export const ALL_PRODUCTS = [
 
 export const SIGNATURE_PRODUCTS = [
   {
-    "id": "fur-kanso-sofa-2",
-    "name": "Kanso Modular Three-Seater",
+    "id": "fur-travertine-table",
+    "name": "Aura Monolithic Travertine Coffee Table",
     "category": "Living Room",
-    "itemType": "sofa",
-    "price": 890,
-    "originalPrice": 1050,
+    "itemType": "table",
+    "price": 540,
+    "originalPrice": 640,
     "rating": 4.9,
-    "reviewCount": 48,
-    "badge": "Best Seller",
-    "material": "FSC Kiln-Dried Solid Oak & High-Density Belgian Bouclé",
-    "dimensions": "W 224cm × D 92cm × H 74cm (Seat Height 42cm)",
-    "finish": "Natural Matte Plant-Based Hardwax",
-    "leadTime": "24–48 Hours in Phnom Penh",
-    "image": "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=1000&q=80",
+    "reviewCount": 31,
+    "badge": "Curator Pick",
+    "material": "Honed Roman Navona Travertine & Solid Smoked Teak Plinth",
+    "dimensions": "W 120cm × D 70cm × H 36cm",
+    "finish": "Penetrating Matte Stone Sealant & Natural Teak Oil",
+    "leadTime": "In Stock in Daun Penh Showroom",
+    "image": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1000&q=80",
     "gallery": [
-      "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=1000&q=80",
-      "https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?auto=format&fit=crop&w=1000&q=80",
-      "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=1000&q=80"
+      "https://images.unsplash.com/photo-1565793298595-6a879b1d9492?auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1618220179428-22790b461013?auto=format&fit=crop&w=1000&q=80"
     ],
     "colors": [
       {
-        "name": "Oatmeal Bouclé",
-        "hex": "#E6E0D4",
+        "name": "Navona Cream",
+        "hex": "#E8E2D5",
         "inStock": true
       },
       {
-        "name": "Warm Charcoal",
-        "hex": "#2C2A29",
-        "inStock": true
-      },
-      {
-        "name": "Forest Moss",
-        "hex": "#3B443B",
+        "name": "Silver Vein",
+        "hex": "#C5BFB5",
         "inStock": true
       }
     ],
-    "description": "Engineered around deliberate low horizontal lines, the Kanso Sofa anchors open-plan rooms. Deep feather-down alternative cushions rest on an exposed solid white oak plinth with mortise-and-tenon joints.",
+    "description": "Cut from monolithic Roman travertine blocks with soft organic bullnose edges. The natural open-pore cavities are preserved to celebrate geological honesty, hovering weightlessly atop an interlocking smoked teak foundation.",
     "features": [
-      "Removable, machine-washable commercial-grade bouclé slipcovers",
-      "Solid kiln-dried Appalachian white oak perimeter foundation",
-      "Reinforced high-resilience foam core with hypoallergenic cloud topper",
-      "Anti-sag European steel serpentine suspension springs"
+      "Monolithic 30mm double-bevelled natural travertine slab",
+      "Interlocking notched Burmese teak cross-brace plinth",
+      "Hand-buffed natural matte sealer repels red wine and coffee",
+      "Each stone specimen displays unique ancient sediment veins"
     ]
   },
   {
-    "id": "fur-nordic-armchair-2",
-    "name": "Soren Low Armchair",
+    "id": "fur-soma-chair",
+    "name": "Soma Curved Lounge Chair",
     "category": "Living Room",
     "itemType": "chair",
-    "price": 340,
-    "originalPrice": 395,
+    "price": 410,
+    "originalPrice": 480,
     "rating": 4.8,
-    "reviewCount": 34,
-    "badge": "Studio Favorite",
-    "material": "Solid American Walnut & Top-Grain Aniline Leather",
-    "dimensions": "W 76cm × D 82cm × H 78cm",
-    "finish": "Hand-Rubbed Organic Linseed Oil",
-    "leadTime": "In Stock (Immediate Dispatch)",
-    "image": "https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?auto=format&fit=crop&w=1000&q=80",
+    "reviewCount": 27,
+    "badge": "New Arrival",
+    "material": "Hand-Spun Raw Bouclé & Steam-Bent Beechwood",
+    "dimensions": "W 84cm × D 90cm × H 76cm (Seat Height 41cm)",
+    "finish": "Natural Steam-Bent Beech & Textured Linen-Bouclé Blend",
+    "leadTime": "24–48 Hours Dispatch",
+    "image": "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=1000&q=80",
     "gallery": [
-      "https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?auto=format&fit=crop&w=1000&q=80",
-      "https://images.unsplash.com/photo-1577140917170-285929fb55b7?auto=format&fit=crop&w=1000&q=80"
+      "https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1592078615290-033ee584e267?auto=format&fit=crop&w=1000&q=80"
     ],
     "colors": [
       {
-        "name": "Cognac Saddle",
-        "hex": "#8B4513",
+        "name": "Raw Ecru",
+        "hex": "#ECE6DC",
         "inStock": true
       },
       {
-        "name": "Pitch Black",
-        "hex": "#1C1917",
+        "name": "Fossil Grey",
+        "hex": "#7D7B7A",
         "inStock": true
-      },
-      {
-        "name": "Sand Taupe",
-        "hex": "#D7C4B7",
-        "inStock": false
       }
     ],
-    "description": "An ergonomic study in sculpted timber. Continuous steam-bent armrests flow seamlessly into tapered rear legs, supporting a cantilevered seat pan tuned for hours of comfortable reading.",
+    "description": "A sculptural celebration of curved tension and plush ergonomics. The Soma features steam-bent timber rails that cradle an oversized lumbar pillow upholstered in high-twist French nubuck fleece.",
     "features": [
-      "Hand-carved ergonomic paddle armrests for wrist rest",
-      "Vegetable-tanned full-grain leather that patinas gracefully",
-      "Brass hardware accents hidden inside structural jointing",
-      "Tested to withstand over 180kg static load"
+      "Continuous steam-formed arch frame engineered without metal brackets",
+      "Multi-density cloud core cushion with ergonomic cervical curvature",
+      "Stain-resistant fluorocarbon-free textile treatment",
+      "Hidden felt floor glide system protects hardwood surfaces"
     ]
   },
   {
-    "id": "fur-dining-table-2",
-    "name": "Torii 8-Seater Dining Table",
+    "id": "fur-teak-dining",
+    "name": "Kanso Teak Dining Table",
     "category": "Dining Room",
     "itemType": "table",
-    "price": 760,
-    "originalPrice": 890,
-    "rating": 5,
-    "reviewCount": 29,
-    "badge": "Craftsman Specimen",
-    "material": "Solid European White Oak (Full Planks)",
-    "dimensions": "L 210cm × W 95cm × H 75cm",
-    "finish": "Zero-VOC Water-Based Polyx Shield",
+    "price": 820,
+    "originalPrice": 950,
+    "rating": 5.0,
+    "reviewCount": 38,
+    "badge": "Masterpiece",
+    "material": "Reclaimed Re-sawn Teak with Cast Iron Tie-Rods",
+    "dimensions": "L 220cm × W 100cm × H 76cm",
+    "finish": "Raw Sanded Teak with Cold-Pressed Flaxseed Oil",
     "leadTime": "3–5 Days Handcrafted Batch",
-    "image": "https://images.unsplash.com/photo-1615066390971-03e4e1c36ddf?auto=format&fit=crop&w=1000&q=80",
+    "image": "https://images.unsplash.com/photo-1530018607912-eff2daa1bac4?auto=format&fit=crop&w=1000&q=80",
     "gallery": [
-      "https://images.unsplash.com/photo-1615066390971-03e4e1c36ddf?auto=format&fit=crop&w=1000&q=80",
-      "https://images.unsplash.com/photo-1577140917170-285929fb55b7?auto=format&fit=crop&w=1000&q=80"
+      "https://images.unsplash.com/photo-1519947486511-46149fa0a254?auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1519961655809-34fa156820ff?auto=format&fit=crop&w=1000&q=80"
     ],
     "colors": [
       {
-        "name": "Natural White Oak",
-        "hex": "#D8C3A5",
+        "name": "Golden Honey Teak",
+        "hex": "#B8860B",
         "inStock": true
       },
       {
-        "name": "Smoked Walnut Finish",
-        "hex": "#5C4033",
+        "name": "Aged Weathered Grey",
+        "hex": "#8F8B82",
         "inStock": true
       }
     ],
-    "description": "Inspired by traditional Japanese temple entry gates. The Torii Table showcases 40mm thick uninterrupted solid oak staves with butterfly key inserts stabilizing natural timber grain patterns.",
+    "description": "Sourced from historical timber beams and re-milled by master joiners. The Kanso Teak Table preserves authentic hand-hewn axe marks and tight grain rings that only centuried teakwood possesses.",
     "features": [
-      "40mm heavy slab edge profile with soft bullnose radius",
-      "Undermount steel stabilization channels preventing seasonal warping",
-      "Recessed trestle legs allowing seating on all 4 sides without knee bumping",
-      "Food-safe heat and water resistant matte clear coating"
+      "Naturally waterproof timber rich in natural silica and protective resins",
+      "Hand-forged blackened iron tension rods provide seismic stability",
+      "Bookmatched tabletop grain with traditional wooden spline keys",
+      "Comfortably accommodates 8 to 10 dinner guests"
     ]
   },
   {
-    "id": "fur-tambour-credenza-2",
-    "name": "Mori Tambour Credenza",
+    "id": "fur-vesper-sideboard",
+    "name": "Vesper Fluted Marble Sideboard",
     "category": "Storage",
     "itemType": "storage",
-    "price": 680,
-    "originalPrice": 790,
+    "price": 740,
+    "originalPrice": 860,
     "rating": 4.9,
-    "reviewCount": 22,
+    "reviewCount": 24,
     "badge": "Signature",
-    "material": "Solid Walnut Framing with Flexible Wood Slat Doors",
-    "dimensions": "W 180cm × D 45cm × H 68cm",
-    "finish": "Satin Hand-Rubbed Wax",
-    "leadTime": "In Stock in Daun Penh Showroom",
-    "image": "https://images.unsplash.com/photo-1595428774223-ef52624120d2?auto=format&fit=crop&w=1000&q=80",
+    "material": "Italian Carrara White Marble & Fluted Ebony Ash",
+    "dimensions": "W 160cm × D 48cm × H 72cm",
+    "finish": "Silky Matte Honed Marble & Deep Charcoal Ash",
+    "leadTime": "In Stock (Immediate Dispatch)",
+    "image": "https://images.unsplash.com/photo-1538688525198-9b88f6f53126?auto=format&fit=crop&w=1000&q=80",
     "gallery": [
-      "https://images.unsplash.com/photo-1595428774223-ef52624120d2?auto=format&fit=crop&w=1000&q=80",
-      "https://images.unsplash.com/photo-1538688525198-9b88f6f53126?auto=format&fit=crop&w=1000&q=80"
+      "https://images.unsplash.com/photo-1594026112284-02bb6f3352fe?auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1527066579998-dbbae57f45ce?auto=format&fit=crop&w=1000&q=80"
     ],
     "colors": [
       {
-        "name": "American Walnut",
-        "hex": "#4A3728",
+        "name": "Ebony & White Marble",
+        "hex": "#222222",
         "inStock": true
       },
       {
-        "name": "Light Ash",
-        "hex": "#D6CFC7",
+        "name": "Smoked Ash & Grigio",
+        "hex": "#48433F",
         "inStock": true
       }
     ],
-    "description": "Two fluid tambour doors slide gracefully along hidden CNC-milled tracks into concealed wall cavities, revealing dual storage chambers with height-adjustable shelving and cable grommets.",
+    "description": "Harmonizing cool Italian marble with rich vertical fluted woodworking. Two push-to-open fluted cabinet doors conceal adjustable wine stemware racks and velvet-lined silver organizers.",
     "features": [
-      "Whisper-quiet sliding tambour slat action",
-      "Internal cable pass-throughs for TV, audio receiver, or gaming gear",
-      "Solid wood drawer boxes with traditional dovetail joinery",
-      "Brass leg caps with built-in height levelling feet"
+      "Solid 20mm Italian Carrara marble top slab with rounded safety chamfers",
+      "Precision CNC-fluted solid ash cabinet faces with hidden soft-close hinges",
+      "Integrated magnetic cable management portals for audio equipment",
+      "Solid brushed brass pedestal base with micro-leveling glides"
     ]
   }
 ];
 
 export const FEATURED_PRODUCTS = [
   {
-    "id": "fur-kanso-sofa-3",
-    "name": "Kanso Modular Three-Seater",
-    "category": "Living Room",
-    "itemType": "sofa",
-    "price": 890,
-    "originalPrice": 1050,
-    "rating": 4.9,
-    "reviewCount": 48,
-    "badge": "Best Seller",
-    "material": "FSC Kiln-Dried Solid Oak & High-Density Belgian Bouclé",
-    "dimensions": "W 224cm × D 92cm × H 74cm (Seat Height 42cm)",
-    "finish": "Natural Matte Plant-Based Hardwax",
-    "leadTime": "24–48 Hours in Phnom Penh",
-    "image": "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=1000&q=80",
-    "gallery": [
-      "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=1000&q=80",
-      "https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?auto=format&fit=crop&w=1000&q=80",
-      "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=1000&q=80"
-    ],
-    "colors": [
-      {
-        "name": "Oatmeal Bouclé",
-        "hex": "#E6E0D4",
-        "inStock": true
-      },
-      {
-        "name": "Warm Charcoal",
-        "hex": "#2C2A29",
-        "inStock": true
-      },
-      {
-        "name": "Forest Moss",
-        "hex": "#3B443B",
-        "inStock": true
-      }
-    ],
-    "description": "Engineered around deliberate low horizontal lines, the Kanso Sofa anchors open-plan rooms. Deep feather-down alternative cushions rest on an exposed solid white oak plinth with mortise-and-tenon joints.",
-    "features": [
-      "Removable, machine-washable commercial-grade bouclé slipcovers",
-      "Solid kiln-dried Appalachian white oak perimeter foundation",
-      "Reinforced high-resilience foam core with hypoallergenic cloud topper",
-      "Anti-sag European steel serpentine suspension springs"
-    ]
-  },
-  {
-    "id": "fur-nordic-armchair-3",
-    "name": "Soren Low Armchair",
-    "category": "Living Room",
-    "itemType": "chair",
-    "price": 340,
-    "originalPrice": 395,
-    "rating": 4.8,
-    "reviewCount": 34,
-    "badge": "Studio Favorite",
-    "material": "Solid American Walnut & Top-Grain Aniline Leather",
-    "dimensions": "W 76cm × D 82cm × H 78cm",
-    "finish": "Hand-Rubbed Organic Linseed Oil",
-    "leadTime": "In Stock (Immediate Dispatch)",
-    "image": "https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?auto=format&fit=crop&w=1000&q=80",
-    "gallery": [
-      "https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?auto=format&fit=crop&w=1000&q=80",
-      "https://images.unsplash.com/photo-1577140917170-285929fb55b7?auto=format&fit=crop&w=1000&q=80"
-    ],
-    "colors": [
-      {
-        "name": "Cognac Saddle",
-        "hex": "#8B4513",
-        "inStock": true
-      },
-      {
-        "name": "Pitch Black",
-        "hex": "#1C1917",
-        "inStock": true
-      },
-      {
-        "name": "Sand Taupe",
-        "hex": "#D7C4B7",
-        "inStock": false
-      }
-    ],
-    "description": "An ergonomic study in sculpted timber. Continuous steam-bent armrests flow seamlessly into tapered rear legs, supporting a cantilevered seat pan tuned for hours of comfortable reading.",
-    "features": [
-      "Hand-carved ergonomic paddle armrests for wrist rest",
-      "Vegetable-tanned full-grain leather that patinas gracefully",
-      "Brass hardware accents hidden inside structural jointing",
-      "Tested to withstand over 180kg static load"
-    ]
-  },
-  {
-    "id": "fur-dining-table-3",
-    "name": "Torii 8-Seater Dining Table",
-    "category": "Dining Room",
-    "itemType": "table",
-    "price": 760,
-    "originalPrice": 890,
-    "rating": 5,
-    "reviewCount": 29,
-    "badge": "Craftsman Specimen",
-    "material": "Solid European White Oak (Full Planks)",
-    "dimensions": "L 210cm × W 95cm × H 75cm",
-    "finish": "Zero-VOC Water-Based Polyx Shield",
-    "leadTime": "3–5 Days Handcrafted Batch",
-    "image": "https://images.unsplash.com/photo-1615066390971-03e4e1c36ddf?auto=format&fit=crop&w=1000&q=80",
-    "gallery": [
-      "https://images.unsplash.com/photo-1615066390971-03e4e1c36ddf?auto=format&fit=crop&w=1000&q=80",
-      "https://images.unsplash.com/photo-1577140917170-285929fb55b7?auto=format&fit=crop&w=1000&q=80"
-    ],
-    "colors": [
-      {
-        "name": "Natural White Oak",
-        "hex": "#D8C3A5",
-        "inStock": true
-      },
-      {
-        "name": "Smoked Walnut Finish",
-        "hex": "#5C4033",
-        "inStock": true
-      }
-    ],
-    "description": "Inspired by traditional Japanese temple entry gates. The Torii Table showcases 40mm thick uninterrupted solid oak staves with butterfly key inserts stabilizing natural timber grain patterns.",
-    "features": [
-      "40mm heavy slab edge profile with soft bullnose radius",
-      "Undermount steel stabilization channels preventing seasonal warping",
-      "Recessed trestle legs allowing seating on all 4 sides without knee bumping",
-      "Food-safe heat and water resistant matte clear coating"
-    ]
-  },
-  {
-    "id": "fur-tambour-credenza-3",
-    "name": "Mori Tambour Credenza",
-    "category": "Storage",
+    "id": "fur-komorebi-nightstand",
+    "name": "Komorebi Floating Bedside Console",
+    "category": "Bedroom",
     "itemType": "storage",
-    "price": 680,
-    "originalPrice": 790,
-    "rating": 4.9,
-    "reviewCount": 22,
-    "badge": "Signature",
-    "material": "Solid Walnut Framing with Flexible Wood Slat Doors",
-    "dimensions": "W 180cm × D 45cm × H 68cm",
-    "finish": "Satin Hand-Rubbed Wax",
-    "leadTime": "In Stock in Daun Penh Showroom",
-    "image": "https://images.unsplash.com/photo-1595428774223-ef52624120d2?auto=format&fit=crop&w=1000&q=80",
+    "price": 230,
+    "originalPrice": 280,
+    "rating": 4.8,
+    "reviewCount": 21,
+    "badge": "Compact Living",
+    "material": "Solid American Black Walnut & Brushed Copper Pulls",
+    "dimensions": "W 52cm × D 38cm × H 32cm",
+    "finish": "Satin Hand-Rubbed Walnut Wax",
+    "leadTime": "In Stock",
+    "image": "https://images.unsplash.com/photo-1532323544230-7191fd51bc1b?auto=format&fit=crop&w=1000&q=80",
     "gallery": [
-      "https://images.unsplash.com/photo-1595428774223-ef52624120d2?auto=format&fit=crop&w=1000&q=80",
-      "https://images.unsplash.com/photo-1538688525198-9b88f6f53126?auto=format&fit=crop&w=1000&q=80"
+      "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1617325247661-675ab4b64ae2?auto=format&fit=crop&w=1000&q=80"
     ],
     "colors": [
       {
@@ -694,20 +554,196 @@ export const FEATURED_PRODUCTS = [
         "inStock": true
       },
       {
-        "name": "Light Ash",
-        "hex": "#D6CFC7",
+        "name": "Natural Ash",
+        "hex": "#DDD2C3",
         "inStock": true
       }
     ],
-    "description": "Two fluid tambour doors slide gracefully along hidden CNC-milled tracks into concealed wall cavities, revealing dual storage chambers with height-adjustable shelving and cable grommets.",
+    "description": "A wall-mounted floating silhouette designed to create an airy, unencumbered bedside space. Features a silent-gliding dovetail drawer and a concealed lower open nook for nightly reading.",
     "features": [
-      "Whisper-quiet sliding tambour slat action",
-      "Internal cable pass-throughs for TV, audio receiver, or gaming gear",
-      "Solid wood drawer boxes with traditional dovetail joinery",
-      "Brass leg caps with built-in height levelling feet"
+      "Heavy-duty French cleat mounting hardware supports up to 45kg load",
+      "Undermount soft-close drawer glide mechanism with silent dampening",
+      "Rear notch accommodates lamp cords and wireless charging pads",
+      "Solid timber dovetail drawer box with aromatic cedar bottom"
+    ]
+  },
+  {
+    "id": "fur-tate-cane-chair",
+    "name": "Tate Woven Cane Dining Armchair",
+    "category": "Dining Room",
+    "itemType": "chair",
+    "price": 290,
+    "originalPrice": 340,
+    "rating": 4.8,
+    "reviewCount": 42,
+    "badge": "Best Seller",
+    "material": "Natural Rattan Cane Weave & Solid Teak Frame",
+    "dimensions": "W 56cm × D 58cm × H 82cm (Seat Height 45cm)",
+    "finish": "Natural Blonde Rattan & Protective Teak Wax",
+    "leadTime": "In Stock (Immediate Dispatch)",
+    "image": "https://images.unsplash.com/photo-1567016432779-094069958ea5?auto=format&fit=crop&w=1000&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1512212621149-107ffe572d2f?auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?auto=format&fit=crop&w=1000&q=80"
+    ],
+    "colors": [
+      {
+        "name": "Natural Honey Cane",
+        "hex": "#D6B88D",
+        "inStock": true
+      },
+      {
+        "name": "Blackened Teak",
+        "hex": "#22211F",
+        "inStock": true
+      }
+    ],
+    "description": "Handwoven in a classic octagonal French cane pattern, the Tate chair combines tropical lightness with the rock-solid structure of kiln-dried plantation teak. The breathable weave keeps you cool through lengthy family dinners.",
+    "features": [
+      "Eight-way double hand-caned backrest and reinforced seat pan",
+      "Tenoned teak frame resistant to high humidity and tropical climates",
+      "Slightly inclined back angle relieves lumbar tension while dining",
+      "Stackable up to 3 units high for flexible space planning"
+    ]
+  },
+  {
+    "id": "fur-oasis-desk",
+    "name": "Oasis Travertine Console Desk",
+    "category": "Office",
+    "itemType": "desk",
+    "price": 580,
+    "originalPrice": 690,
+    "rating": 4.8,
+    "reviewCount": 16,
+    "badge": "Limited Run",
+    "material": "Beige Persian Travertine & Solid Cast Bronze Pylons",
+    "dimensions": "W 130cm × D 55cm × H 74cm",
+    "finish": "Polished Travertine Slab with Waxed Cast Bronze",
+    "leadTime": "3–5 Days Handcrafted Batch",
+    "image": "https://images.unsplash.com/photo-1519710164239-da123dc03ef4?auto=format&fit=crop&w=1000&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1540518614846-7ede433c4b49?auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1508253578933-20b529302151?auto=format&fit=crop&w=1000&q=80"
+    ],
+    "colors": [
+      {
+        "name": "Warm Travertine",
+        "hex": "#DDD3C1",
+        "inStock": true
+      },
+      {
+        "name": "Dark Walnut & Bronze",
+        "hex": "#4C3828",
+        "inStock": true
+      }
+    ],
+    "description": "Bridging the boundary between executive console and sculptural writing bureau. Two cylindrical bronze pylons elevate a honed Persian travertine top complete with an integrated cable cutaway and leather blotter inlay.",
+    "features": [
+      "Honed monolithic stone work surface impervious to ballpoint indentations",
+      "Sculptural bronze-toned steel cylinder base provides vibration-free stability",
+      "Integrated magnetic underside clips keep power cables completely invisible",
+      "Compact 55cm depth perfectly tailored for modern bedroom and office nooks"
+    ]
+  },
+  {
+    "id": "fur-solstice-pendant",
+    "name": "Solstice Brass & Paper Pendant",
+    "category": "Lighting",
+    "itemType": "lighting",
+    "price": 160,
+    "originalPrice": 195,
+    "rating": 4.9,
+    "reviewCount": 25,
+    "badge": "New Release",
+    "material": "Spun Antiqued Brass & Handmade Kozo Paper Diffuser",
+    "dimensions": "Diameter 52cm × H 32cm (180cm Adjustable Cord)",
+    "finish": "Patinated Brushed Raw Brass & Natural Fibers",
+    "leadTime": "In Stock",
+    "image": "https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?auto=format&fit=crop&w=1000&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1524484485831-a92ffc0de03f?auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=1000&q=80"
+    ],
+    "colors": [
+      {
+        "name": "Aged Brass",
+        "hex": "#B59E5F",
+        "inStock": true
+      },
+      {
+        "name": "Matte Black",
+        "hex": "#1C1B1A",
+        "inStock": true
+      }
+    ],
+    "description": "Suspended overhead dining tables or reading corners, the Solstice pendant casts a downward focused pool of warm light while gently filtering glow upward through its fibrous kozo paper shade.",
+    "features": [
+      "Solid spun brass dome with hand-applied oxidation patina",
+      "Japanese Kozo paper lower diffuser eliminates harsh filament glare",
+      "Supplied with 1.8m braided taupe linen cord and matching brass ceiling canopy",
+      "Universal E26/E27 ceramic socket, dimmer-compatible with warm LEDs"
     ]
   }
 ];
+
+// Unified catalog containing all handcrafted products across base, signature, and featured collections
+const RAW_ALL_PRODUCTS = [
+  ...BASE_PRODUCTS,
+  ...SIGNATURE_PRODUCTS,
+  ...FEATURED_PRODUCTS
+];
+
+export const ALL_PRODUCTS = RAW_ALL_PRODUCTS.map((p, idx) => {
+  const stockCount = p.stockCount !== undefined ? p.stockCount : ((idx % 3 === 0) ? 3 : 8);
+  const inStock = p.inStock !== undefined ? p.inStock : (stockCount > 0);
+  const sku = p.sku || `FUR-${p.id.replace(/^(fur|anti)-/, '').toUpperCase()}`;
+
+  const widthMatch = p.dimensions?.match(/W\s*([\d\w\.]+)/i) || p.dimensions?.match(/L\s*([\d\w\.]+)/i);
+  const depthMatch = p.dimensions?.match(/D\s*([\d\w\.]+)/i);
+  const heightMatch = p.dimensions?.match(/H\s*([\d\w\.]+)/i);
+  const seatHeightMatch = p.dimensions?.match(/Seat Height\s*([\d\w\.]+)/i);
+
+  const detailedDimensions = p.detailedDimensions || {
+    width: widthMatch ? widthMatch[1] : (p.dimensions || 'Standard'),
+    depth: depthMatch ? depthMatch[1] : 'Standard',
+    height: heightMatch ? heightMatch[1] : 'Standard',
+    seatHeight: seatHeightMatch ? seatHeightMatch[1] : undefined
+  };
+
+  const defaultReviews = [
+    {
+      id: `rev-${p.id}-1`,
+      author: 'Sophea C.',
+      verified: true,
+      date: 'Recent',
+      rating: 5,
+      title: 'Remarkable craftsmanship and timber finish',
+      comment: `The timber grain on this ${p.name.toLowerCase()} is breathtaking in person. Solid, tactile, and flawless white-glove setup.`,
+      location: 'Phnom Penh'
+    },
+    {
+      id: `rev-${p.id}-2`,
+      author: 'David V.',
+      verified: true,
+      date: '2 weeks ago',
+      rating: 5,
+      title: 'Far superior to imported flat-pack items',
+      comment: 'You can immediately feel the weight and strength of traditional mortise joinery. Heirloom quality.',
+      location: 'Siem Reap'
+    }
+  ];
+
+  return {
+    ...p,
+    inStock,
+    stockCount,
+    sku,
+    weight: p.weight || '38 kg',
+    careGuide: p.careGuide || 'Dust regularly with a dry microfibre cloth. Treat wood with organic hardwax or linseed oil once or twice a year to preserve moisture and luster.',
+    detailedDimensions,
+    reviewsList: p.reviewsList || defaultReviews
+  };
+});
 
 export const TESTIMONIALS = [
   {
@@ -753,7 +789,7 @@ export const BLOG_POSTS = [
     "date": "February 28, 2025",
     "readTime": "5 min read",
     "author": "Studio Design Team",
-    "image": "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=800&q=80",
+    "image": "https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=800&q=80",
     "content": [
       "Urban living spaces in growing Southeast Asian metropolises often feature ceiling heights between 2.6m and 2.9m. Filling these volumes with high-backed, bulky furniture fragments natural window light and creates visual claustrophobia.",
       "By dropping sofa and bed heights by even 8–10 centimeters, sightlines across rooms remain unobstructed. Natural daylight bounces deeper into floorplans, and rooms feel expansive and calm.",

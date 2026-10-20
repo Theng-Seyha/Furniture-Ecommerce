@@ -3,6 +3,8 @@ import { motion, AnimatePresence } from "motion/react";
 import { X, Plus, Minus, Trash2, ShoppingBag, ArrowRight, Tag, Send, Truck, Wrench, PackageCheck } from "lucide-react";
 import { useCart } from "../context/CartContext";
 import { TELEGRAM_CONFIG } from "../services/telegramService";
+import { useBodyScrollLock } from "../hooks/useBodyScrollLock";
+
 export const CartDrawer = () => {
   const {
     cart,
@@ -26,6 +28,10 @@ export const CartDrawer = () => {
     savedOrdersCount,
     setIsOrdersModalOpen
   } = useCart();
+
+  // Lock background scroll when cart drawer is open
+  useBodyScrollLock(isCartOpen);
+
   const [inputCode, setInputCode] = useState("");
   const [promoFeedback, setPromoFeedback] = useState(null);
   const handleApplyCode = (e) => {
@@ -49,7 +55,7 @@ export const CartDrawer = () => {
     animate={{ opacity: 1 }}
     exit={{ opacity: 0 }}
     onClick={() => setIsCartOpen(false)}
-    className="absolute inset-0 bg-stone-950/50 backdrop-blur-xs transition-opacity"
+    className="absolute inset-0 bg-stone-950/60 dark:bg-black/75 backdrop-blur-md transition-opacity"
   />
 
           <div className="fixed inset-y-0 right-0 max-w-full flex w-full sm:w-auto">
@@ -58,7 +64,7 @@ export const CartDrawer = () => {
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "spring", damping: 28, stiffness: 280 }}
-              className="w-full sm:w-[440px] md:w-[480px] bg-[#FAF8F5] dark:bg-[#161412] text-stone-900 dark:text-stone-100 shadow-2xl flex flex-col h-full overflow-x-hidden"
+              className="w-full sm:w-[440px] md:w-[480px] bg-[#FAF8F5] dark:bg-[#161412] text-stone-900 dark:text-stone-100 shadow-2xl flex flex-col h-full overflow-x-hidden overscroll-contain"
             >
               
               {
@@ -145,97 +151,97 @@ export const CartDrawer = () => {
                         <span>View My Orders ({savedOrdersCount})</span>
                       </button>
                     </div>
-                  </div> : cart.map((item, index) => <motion.div
-    key={`${item.product.id}-${item.selectedColor}-${index}`}
-    layout
-    initial={{ opacity: 0, y: 10 }}
-    animate={{ opacity: 1, y: 0 }}
-    exit={{ opacity: 0, scale: 0.95 }}
-    className="flex flex-col p-3.5 rounded-2xl bg-white dark:bg-stone-900 border border-stone-200/70 dark:border-stone-800 shadow-2xs space-y-2.5"
-  >
-                      <div className="flex gap-3">
-                        {
-    /* Image */
-  }
-                        <div
-                          onClick={() => {
-                            setIsCartOpen(false);
-                            navigateToProduct(item.product.id);
-                          }}
-                          className="w-20 h-20 rounded-xl overflow-hidden bg-stone-100 dark:bg-stone-800 shrink-0 cursor-pointer"
-                        >
-                          <img
-                            src={item.selectedImage || item.product.image}
-                            alt={item.product.name}
-                            className="w-full h-full object-cover hover:scale-105 transition-transform"
-                          />
-                        </div>
-
-                        {
-    /* Content */
-  }
-                        <div className="grow flex flex-col justify-between">
-                          <div className="flex items-start justify-between gap-2">
-                            <div>
-                              <h4
-    onClick={() => {
-      setIsCartOpen(false);
-      navigateToProduct(item.product.id);
-    }}
-    className="text-xs sm:text-sm font-semibold text-stone-900 dark:text-stone-100 line-clamp-1 hover:text-amber-800 cursor-pointer"
-  >
-                                {item.product.name}
-                              </h4>
-                              <p className="text-[11px] text-stone-500 dark:text-stone-400">
-                                Finish: {item.selectedColor || "Standard"}
-                              </p>
-                            </div>
-                            <button
-    onClick={() => removeFromCart(item.product.id, item.selectedColor)}
-    className="text-stone-400 hover:text-rose-600 transition-colors cursor-pointer p-1"
-    aria-label={`Remove ${item.product.name}`}
-  >
-                              <Trash2 className="w-3.5 h-3.5" />
-                            </button>
+                  </div> : cart.map((item, index) => {
+                    const prodId = item.product?.id || item.id;
+                    const prodName = item.product?.name || item.name || 'Handcrafted Furniture Piece';
+                    const prodPrice = item.product?.price || item.price || 0;
+                    const prodImg = item.selectedImage || item.product?.image || item.image;
+                    return (
+                      <motion.div
+                        key={`${prodId}-${item.selectedColor || 'Standard'}-${index}`}
+                        layout
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, scale: 0.95 }}
+                        className="flex flex-col p-3.5 rounded-2xl bg-white dark:bg-stone-900 border border-stone-200/70 dark:border-stone-800 shadow-2xs space-y-2.5"
+                      >
+                        <div className="flex gap-3">
+                          {/* Image */}
+                          <div
+                            onClick={() => {
+                              setIsCartOpen(false);
+                              if (prodId) navigateToProduct(prodId);
+                            }}
+                            className="w-20 h-20 rounded-xl overflow-hidden bg-stone-100 dark:bg-stone-800 shrink-0 cursor-pointer"
+                          >
+                            <img
+                              src={prodImg}
+                              alt={prodName}
+                              className="w-full h-full object-cover hover:scale-105 transition-transform"
+                            />
                           </div>
 
-                          <div className="flex items-center justify-between mt-2">
-                            <div className="flex items-center gap-1.5 border border-stone-200 dark:border-stone-700 rounded-full px-2 py-0.5 bg-stone-50 dark:bg-stone-800">
+                          {/* Content */}
+                          <div className="grow flex flex-col justify-between">
+                            <div className="flex items-start justify-between gap-2">
+                              <div>
+                                <h4
+                                  onClick={() => {
+                                    setIsCartOpen(false);
+                                    if (prodId) navigateToProduct(prodId);
+                                  }}
+                                  className="text-xs sm:text-sm font-semibold text-stone-900 dark:text-stone-100 line-clamp-1 hover:text-amber-800 cursor-pointer"
+                                >
+                                  {prodName}
+                                </h4>
+                                <p className="text-[11px] text-stone-500 dark:text-stone-400">
+                                  Finish: {item.selectedColor || "Standard"}
+                                </p>
+                              </div>
                               <button
-    onClick={() => updateQuantity(item.product.id, item.quantity - 1, item.selectedColor)}
-    className="p-1 text-stone-500 hover:text-stone-900 dark:hover:text-stone-100 cursor-pointer"
-    aria-label="Decrease quantity"
-  >
-                                <Minus className="w-3 h-3" />
-                              </button>
-                              <span className="text-xs font-semibold px-1.5">{item.quantity}</span>
-                              <button
-    onClick={() => updateQuantity(item.product.id, item.quantity + 1, item.selectedColor)}
-    className="p-1 text-stone-500 hover:text-stone-900 dark:hover:text-stone-100 cursor-pointer"
-    aria-label="Increase quantity"
-  >
-                                <Plus className="w-3 h-3" />
+                                onClick={() => removeFromCart(prodId, item.selectedColor)}
+                                className="text-stone-400 hover:text-rose-600 transition-colors cursor-pointer p-1"
+                                aria-label={`Remove ${prodName}`}
+                              >
+                                <Trash2 className="w-3.5 h-3.5" />
                               </button>
                             </div>
 
-                            <span className="text-xs sm:text-sm font-bold text-stone-900 dark:text-stone-100 font-serif">
-                              ${(item.product.price * item.quantity).toLocaleString()}
-                            </span>
+                            <div className="flex items-center justify-between mt-2">
+                              <div className="flex items-center gap-1.5 border border-stone-200 dark:border-stone-700 rounded-full px-2 py-0.5 bg-stone-50 dark:bg-stone-800">
+                                <button
+                                  onClick={() => updateQuantity(prodId, item.quantity - 1, item.selectedColor)}
+                                  className="p-1 text-stone-500 hover:text-stone-900 dark:hover:text-stone-100 cursor-pointer"
+                                  aria-label="Decrease quantity"
+                                >
+                                  <Minus className="w-3 h-3" />
+                                </button>
+                                <span className="text-xs font-semibold px-1.5">{item.quantity}</span>
+                                <button
+                                  onClick={() => updateQuantity(prodId, item.quantity + 1, item.selectedColor)}
+                                  className="p-1 text-stone-500 hover:text-stone-900 dark:hover:text-stone-100 cursor-pointer"
+                                  aria-label="Increase quantity"
+                                >
+                                  <Plus className="w-3 h-3" />
+                                </button>
+                              </div>
+
+                              <span className="text-xs sm:text-sm font-bold text-stone-900 dark:text-stone-100 font-serif">
+                                ${(prodPrice * item.quantity).toLocaleString()}
+                              </span>
+                            </div>
                           </div>
                         </div>
-                      </div>
 
-                      {
-    /* White-Glove In-Home Assembly Add-On Toggle */
-  }
-                      <div className="pt-2 border-t border-stone-100 dark:border-stone-800/80 flex items-center justify-between text-[11px]">
-                        <label className="flex items-center gap-2 cursor-pointer text-stone-600 dark:text-stone-300">
-                          <input
-    type="checkbox"
-    checked={!!item.includeAssembly}
-    onChange={() => toggleItemAssembly(item.product.id, item.selectedColor)}
-    className="rounded border-stone-300 text-amber-800 focus:ring-amber-700 cursor-pointer"
-  />
+                        {/* White-Glove In-Home Assembly Add-On Toggle */}
+                        <div className="pt-2 border-t border-stone-100 dark:border-stone-800/80 flex items-center justify-between text-[11px]">
+                          <label className="flex items-center gap-2 cursor-pointer text-stone-600 dark:text-stone-300">
+                            <input
+                              type="checkbox"
+                              checked={!!item.includeAssembly}
+                              onChange={() => toggleItemAssembly(prodId, item.selectedColor)}
+                              className="rounded border-stone-300 text-amber-800 focus:ring-amber-700 cursor-pointer"
+                            />
                           <span className="flex items-center gap-1">
                             <Wrench className="w-3 h-3 text-stone-400" />
                             White-Glove Assembly (+${40 * item.quantity})
@@ -245,7 +251,9 @@ export const CartDrawer = () => {
                             Included
                           </span>}
                       </div>
-                    </motion.div>)}
+                    </motion.div>
+                  );
+                })}
               </div>
 
               {

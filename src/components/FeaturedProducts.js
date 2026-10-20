@@ -66,12 +66,13 @@ export const FeaturedProducts = () => {
 
   const materialTags = [
     { id: 'all', label: 'All Materials' },
-    { id: 'teak', label: 'Solid Teak', keyword: 'teak' },
-    { id: 'walnut', label: 'American Walnut', keyword: 'walnut' },
-    { id: 'oak', label: 'White Oak', keyword: 'oak' },
-    { id: 'leather', label: 'Top-Grain Leather', keyword: 'leather' },
-    { id: 'boucle', label: 'Bouclé', keyword: 'boucl' },
-    { id: 'marble', label: 'Travertine & Marble', keyword: 'marble' },
+    { id: 'teak', label: 'Solid Teak', keywords: ['teak'] },
+    { id: 'walnut', label: 'American Walnut', keywords: ['walnut'] },
+    { id: 'oak', label: 'White Oak', keywords: ['oak'] },
+    { id: 'leather', label: 'Top-Grain Leather', keywords: ['leather'] },
+    { id: 'boucle', label: 'Bouclé & Linen', keywords: ['boucl', 'linen'] },
+    { id: 'marble', label: 'Travertine & Marble', keywords: ['marble', 'travertine'] },
+    { id: 'cane', label: 'Rattan & Cord', keywords: ['cane', 'rattan', 'cord'] },
   ];
 
   const priceBrackets = [
@@ -120,12 +121,13 @@ export const FeaturedProducts = () => {
       // Material filter
       if (selectedMaterial !== 'all') {
         const mat = materialTags.find((m) => m.id === selectedMaterial);
-        if (
-          mat &&
-          mat.keyword &&
-          !product.material.toLowerCase().includes(mat.keyword.toLowerCase())
-        ) {
-          return false;
+        if (mat) {
+          const kws = mat.keywords || (mat.keyword ? [mat.keyword] : []);
+          const matLower = (product.material || '').toLowerCase();
+          const matches = kws.some((kw) => matLower.includes(kw.toLowerCase()));
+          if (!matches) {
+            return false;
+          }
         }
       }
 
@@ -253,10 +255,10 @@ export const FeaturedProducts = () => {
                       setSelectedCategory(room.id === 'all' ? 'All' : room.id);
                     }
                   }}
-                  className={`px-3.5 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all cursor-pointer select-none shrink-0 ${
+                  className={`px-3.5 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all cursor-pointer select-none shrink-0 border ${
                     isSelected
-                      ? 'bg-stone-900 text-white dark:bg-stone-100 dark:text-stone-900 shadow-xs'
-                      : 'bg-stone-100/90 dark:bg-stone-800/80 text-stone-600 dark:text-stone-300 hover:text-stone-900 dark:hover:text-white hover:bg-stone-200/80 dark:hover:bg-stone-700'
+                      ? 'bg-stone-900 text-white dark:bg-stone-100 dark:text-stone-900 border-stone-900 dark:border-stone-100 shadow-xs'
+                      : 'bg-white dark:bg-stone-800 text-stone-700 dark:text-stone-300 border-stone-200 dark:border-stone-700 hover:text-stone-950 dark:hover:text-white hover:bg-stone-50 dark:hover:bg-stone-700'
                   }`}
                 >
                   {room.label}
@@ -277,10 +279,10 @@ export const FeaturedProducts = () => {
               <button
                 key={type.id}
                 onClick={() => setSelectedItemType(type.id)}
-                className={`px-3 py-1 rounded-full text-[11px] sm:text-xs font-medium whitespace-nowrap transition-all cursor-pointer select-none shrink-0 ${
+                className={`px-3 py-1 rounded-full text-[11px] sm:text-xs font-medium whitespace-nowrap transition-all cursor-pointer select-none shrink-0 border ${
                   isSelected
-                    ? 'bg-stone-900 text-stone-50 dark:bg-stone-100 dark:text-stone-900 shadow-xs'
-                    : 'bg-stone-100/70 dark:bg-stone-800/50 text-stone-500 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-200'
+                    ? 'bg-stone-900 text-stone-50 dark:bg-stone-100 dark:text-stone-900 border-stone-900 dark:border-stone-100 shadow-xs'
+                    : 'bg-white dark:bg-stone-800 text-stone-600 dark:text-stone-400 border-stone-200 dark:border-stone-700 hover:text-stone-900 dark:hover:text-stone-200 hover:bg-stone-50'
                 }`}
               >
                 {type.label}

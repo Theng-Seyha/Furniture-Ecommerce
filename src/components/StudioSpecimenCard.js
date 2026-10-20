@@ -5,7 +5,7 @@ import { useCart } from '../context/CartContext';
 import { ScrollReveal } from './ScrollReveal';
 
 const SPECIMEN_FALLBACK_IMAGE =
-  'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=1000&q=80';
+  'https://images.unsplash.com/photo-1546484396-fb3fc6f95f98?auto=format&fit=crop&w=600&q=80';
 
 /**
  * StudioSpecimenCard
@@ -48,7 +48,7 @@ export const StudioSpecimenCard = () => {
       durability: 'High Stability (20+ yrs)',
       recommendedCare: 'Wipe with a clean dry microfiber cloth. Avoid harsh ammonia cleaners.',
       image:
-        'https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?auto=format&fit=crop&w=600&q=80',
+        'https://images.unsplash.com/photo-1538688423619-a81d3f23454b?auto=format&fit=crop&w=600&q=80',
     },
     ash: {
       name: 'Natural Blonde Ash',
@@ -63,7 +63,7 @@ export const StudioSpecimenCard = () => {
       durability: 'Heavy Daily Use (15+ yrs)',
       recommendedCare: 'Diluted natural castile soap in lukewarm water for stubborn marks.',
       image:
-        'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=600&q=80',
+        'https://images.unsplash.com/photo-1505693314120-0d443867891c?auto=format&fit=crop&w=600&q=80',
     },
   };
 
@@ -303,7 +303,7 @@ export const StudioSpecimenCard = () => {
                 <div className="absolute inset-0 bg-gradient-to-t from-stone-950/60 via-transparent to-transparent pointer-events-none" />
 
                 {/* Floating Specimen Badge */}
-                <div className="absolute bottom-4 left-4 right-4 bg-white/95 dark:bg-stone-900/95 backdrop-blur-md px-4 py-2.5 rounded-xl border border-white/20 dark:border-stone-700 shadow-md flex items-center justify-between">
+                <div className="absolute bottom-4 left-4 right-4 bg-white dark:bg-stone-900 px-4 py-2.5 rounded-xl border border-stone-200/90 dark:border-stone-700 shadow-md flex items-center justify-between">
                   <div>
                     <p className="text-xs font-bold text-stone-900 dark:text-stone-100">
                       {current.name}

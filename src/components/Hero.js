@@ -97,7 +97,7 @@ export const Hero = ({ onShopNow, onViewCollections }) => {
     initial={{ opacity: 0, y: 15 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ delay: 0.5, duration: 0.6 }}
-    className="absolute bottom-5 left-5 sm:bottom-7 sm:left-7 bg-white/90 dark:bg-stone-900/90 backdrop-blur-md px-4 py-2.5 rounded-2xl border border-white/40 dark:border-stone-700/60 shadow-lg flex items-center gap-3"
+    className="absolute bottom-5 left-5 sm:bottom-7 sm:left-7 bg-white dark:bg-stone-900 px-4 py-2.5 rounded-2xl border border-stone-200/90 dark:border-stone-700 shadow-md flex items-center gap-3"
   >
                 <div className="w-9 h-9 rounded-full bg-amber-100 dark:bg-amber-950/60 flex items-center justify-center text-amber-800 dark:text-amber-400">
                   <Sparkles className="w-4 h-4" />

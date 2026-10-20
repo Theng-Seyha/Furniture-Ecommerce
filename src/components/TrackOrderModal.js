@@ -19,6 +19,7 @@ import {
 import { useCart } from '../context/CartContext';
 import { getOrderStatusFromShop, TELEGRAM_CONFIG } from '../services/telegramService';
 import { HANDCRAFTED_STAGES } from '../data/workshopStages';
+import { useBodyScrollLock } from '../hooks/useBodyScrollLock';
 
 /**
  * TrackOrderModal
@@ -38,6 +39,21 @@ export const TrackOrderModal = () => {
   const [statusResult, setStatusResult] = useState(null);
   const [error, setError] = useState('');
   const [activeStageIndex, setActiveStageIndex] = useState(0);
+
+  // Lock background scroll when track order modal is open
+  useBodyScrollLock(Boolean(isTrackOrderModalOpen));
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape' && isTrackOrderModalOpen) {
+        setIsTrackOrderModalOpen(false);
+        setStatusResult(null);
+        setError('');
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isTrackOrderModalOpen, setIsTrackOrderModalOpen]);
 
   // Auto-fill from most recent if available
   useEffect(() => {
@@ -85,12 +101,17 @@ export const TrackOrderModal = () => {
   return (
     <AnimatePresence>
       {isTrackOrderModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-stone-950/65 backdrop-blur-xs overflow-y-auto">
+        <div
+          onClick={(e) => {
+            if (e.target === e.currentTarget) handleClose();
+          }}
+          className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-stone-950/60 dark:bg-black/75 backdrop-blur-md overflow-y-auto overscroll-contain"
+        >
           <motion.div
             initial={{ opacity: 0, scale: 0.95, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
-            className="bg-white dark:bg-[#181614] max-w-2xl w-full rounded-3xl shadow-2xl border border-stone-200 dark:border-stone-800 relative text-stone-900 dark:text-stone-100 overflow-hidden max-h-[92vh] flex flex-col"
+            className="bg-white dark:bg-[#181614] max-w-2xl w-full rounded-3xl shadow-2xl border border-stone-200 dark:border-stone-800 relative text-stone-900 dark:text-stone-100 overflow-hidden overscroll-contain max-h-[92vh] flex flex-col"
           >
             {/* Header */}
             <div className="p-6 border-b border-stone-100 dark:border-stone-800 flex items-center justify-between shrink-0">
@@ -105,13 +126,14 @@ export const TrackOrderModal = () => {
               </div>
               <button
                 onClick={handleClose}
-                className="p-2 rounded-full text-stone-400 hover:text-stone-700 dark:hover:text-stone-200 transition-colors cursor-pointer"
+                aria-label="Close workshop tracker"
+                className="p-2 rounded-full text-stone-400 hover:text-stone-700 dark:hover:text-stone-200 hover:bg-stone-100 dark:hover:bg-stone-800 transition-colors cursor-pointer"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
 
-            <div className="flex-1 overflow-y-auto no-scrollbar p-6 space-y-6">
+            <div className="flex-1 overflow-y-auto overscroll-contain p-6 space-y-6">
               {/* Search Form */}
               <div className="bg-stone-50 dark:bg-stone-900/40 p-5 rounded-2xl border border-stone-200 dark:border-stone-800">
                 <form onSubmit={handleTrack} className="space-y-4">

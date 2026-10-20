@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { Search, X, ArrowRight, CornerDownLeft, Sparkles } from 'lucide-react';
 import { ALL_PRODUCTS } from '../data/furnitureData';
 import { useCart } from '../context/CartContext';
+import { useBodyScrollLock } from '../hooks/useBodyScrollLock';
 
 /**
  * Clean Search Spotlight & Command Palette (Cmd+K / Ctrl+K)
@@ -13,6 +14,9 @@ export const SearchModal = () => {
   const [query, setQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
   const inputRef = useRef(null);
+
+  // Lock background scroll when search modal is open
+  useBodyScrollLock(isSearchOpen);
 
   // Auto-focus input when opened
   useEffect(() => {
@@ -50,11 +54,11 @@ export const SearchModal = () => {
 
     const q = query.toLowerCase();
     return (
-      product.name.toLowerCase().includes(q) ||
-      product.material.toLowerCase().includes(q) ||
-      product.category.toLowerCase().includes(q) ||
-      product.itemType.toLowerCase().includes(q) ||
-      product.description.toLowerCase().includes(q)
+      product.name?.toLowerCase().includes(q) ||
+      product.material?.toLowerCase().includes(q) ||
+      product.category?.toLowerCase().includes(q) ||
+      product.itemType?.toLowerCase().includes(q) ||
+      product.description?.toLowerCase().includes(q)
     );
   }).slice(0, 8);
 
@@ -70,7 +74,7 @@ export const SearchModal = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setIsSearchOpen(false)}
-            className="fixed inset-0 bg-stone-950/50 backdrop-blur-xs"
+            className="fixed inset-0 bg-stone-950/60 dark:bg-black/75 backdrop-blur-md"
           />
 
           {/* Modal Window */}
@@ -127,7 +131,7 @@ export const SearchModal = () => {
             </div>
 
             {/* Results List */}
-            <div className="max-h-[60vh] overflow-y-auto divide-y divide-stone-100 dark:divide-stone-800/60 p-2 sm:p-3">
+            <div className="max-h-[60vh] overflow-y-auto overscroll-contain divide-y divide-stone-100 dark:divide-stone-800/60 p-2 sm:p-3">
               {filteredProducts.length > 0 ? (
                 filteredProducts.map((product) => (
                   <div

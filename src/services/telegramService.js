@@ -5,6 +5,7 @@
  */
 
 import { SAMPLE_ORDERS, HANDCRAFTED_STAGES } from '../data/workshopStages';
+import { fetchOrder } from './firebase';
 
 export const TELEGRAM_CONFIG = {
   BOT_TOKEN: '8888825923:AAEzB68kP5_F7KV74IN3nUVUnUIuVQFG05M',
@@ -218,7 +219,37 @@ export async function getOrderStatusFromShop(orderIdInput, options = {}) {
     };
   }
 
-  // 1. Check known workshop active orders
+  // 1. Check real-time cloud database (Firestore)
+  try {
+    const cloudOrder = await fetchOrder(cleanId);
+    if (cloudOrder) {
+      const stageIdx = cloudOrder.currentStage || 1;
+      const statusLabel = cloudOrder.status || 'Received';
+      return {
+        found: true,
+        orderId: cloudOrder.orderId,
+        customerName: cloudOrder.customerName || 'Studio Client',
+        productName: cloudOrder.items?.[0]?.name || 'Handcrafted Studio Furniture Piece',
+        material: 'Solid Kiln-Dried Hardwood & Sustainable Joinery',
+        destination: `${cloudOrder.address || 'Phnom Penh'}, ${cloudOrder.deliveryCity || 'Cambodia'}`,
+        orderDate: cloudOrder.orderDate || 'Recent',
+        estimatedDelivery: '5–7 Business Days',
+        currentStage: stageIdx,
+        progressPercent: cloudOrder.progressPercent || Math.min(100, stageIdx * 20),
+        artisanLead: 'Theng Seyha (Studio Intake)',
+        workshopBay: `Intake Bay - Queue Active`,
+        phoneNumber: cloudOrder.phoneNumber,
+        telegramUsername: cloudOrder.telegramUsername,
+        logs: [
+          { time: 'Live Bench Log', note: `Status: ${statusLabel}. Real-time record verified.` }
+        ]
+      };
+    }
+  } catch (err) {
+    console.warn('Firestore order check notice:', err);
+  }
+
+  // 2. Check known workshop active orders
   let matched = SAMPLE_ORDERS[cleanId];
 
   // 2. Check saved orders from browser storage if available

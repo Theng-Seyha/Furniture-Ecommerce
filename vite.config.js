@@ -67,15 +67,31 @@ export default defineConfig(() => {
     resolve: {
       alias: {
         '@': path.resolve(__dirname, '.'),
-        'react': path.resolve(__dirname, 'node_modules/react'),
-        'react-dom': path.resolve(__dirname, 'node_modules/react-dom'),
       },
       dedupe: ['react', 'react-dom'],
     },
+    optimizeDeps: {
+      noDiscovery: true,
+      include: [
+        'react',
+        'react-dom',
+        'react-dom/client',
+        'react/jsx-runtime',
+        'react/jsx-dev-runtime',
+        'lucide-react',
+        'motion/react',
+        'firebase/app',
+        'firebase/auth',
+        'firebase/firestore',
+      ],
+    },
     server: {
-      // HMR is disabled in AI Studio via DISABLE_HMR env var.
-      hmr: process.env.DISABLE_HMR !== 'true',
-      watch: process.env.DISABLE_HMR === 'true' ? null : {},
+      port: 3000,
+      host: '0.0.0.0',
+      hmr: false,
+      headers: {
+        'Cache-Control': 'no-store',
+      },
     },
     build: {
       chunkSizeWarningLimit: 1200,

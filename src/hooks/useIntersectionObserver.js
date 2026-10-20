@@ -73,7 +73,14 @@ export const useIntersectionObserver = ({
 
     observer.observe(currentElement);
 
+    // Safety fallback: Guarantees element is never stuck permanently hidden at opacity 0
+    const safetyTimer = setTimeout(() => {
+      setIsIntersecting(true);
+      setHasAnimated(true);
+    }, 1200);
+
     return () => {
+      clearTimeout(safetyTimer);
       if (currentElement) {
         observer.unobserve(currentElement);
       }

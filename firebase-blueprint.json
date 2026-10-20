@@ -1,80 +1,146 @@
 {
   "entities": {
-    "internship_applications": {
-      "title": "Internship Application",
-      "description": "Stores details of internship applicants and their review status.",
+    "orders": {
+      "title": "Studio Order",
+      "description": "Customer purchase orders for handcrafted furniture pieces.",
       "type": "object",
       "properties": {
-        "fullname": {
+        "orderId": {
           "type": "string",
-          "maxLength": 100,
-          "description": "Full name of the applicant"
+          "description": "Unique studio order reference (e.g. FUR-849201)"
         },
-        "email": {
+        "customerName": {
           "type": "string",
-          "format": "email",
-          "description": "Email address for contact and status lookup"
+          "description": "Full name of the customer"
         },
-        "phone": {
+        "phoneNumber": {
           "type": "string",
-          "maxLength": 20,
-          "description": "Phone number"
+          "description": "Customer telephone number"
         },
-        "university": {
+        "telegramUsername": {
           "type": "string",
-          "maxLength": 100,
-          "description": "University name"
+          "description": "Optional Telegram username handle"
         },
-        "github": {
+        "address": {
           "type": "string",
-          "pattern": "^https?://github\\.com/.*$",
-          "description": "GitHub profile link"
+          "description": "Delivery street address"
         },
-        "skills": {
+        "deliveryCity": {
           "type": "string",
-          "maxLength": 500,
-          "description": "Comma-separated list of skills"
+          "description": "Destination city (e.g. Phnom Penh)"
         },
-        "motivation": {
+        "notes": {
           "type": "string",
-          "maxLength": 2000,
-          "description": "Vision and motivation text"
+          "description": "Custom tailoring or delivery instructions"
+        },
+        "paymentMethod": {
+          "type": "string",
+          "description": "Selected payment method"
+        },
+        "items": {
+          "type": "array",
+          "description": "Array of ordered furniture items"
+        },
+        "subtotal": {
+          "type": "number",
+          "description": "Cart items subtotal in USD"
+        },
+        "assemblyFee": {
+          "type": "number",
+          "description": "White-glove assembly fee in USD"
+        },
+        "discount": {
+          "type": "number",
+          "description": "Applied discount in USD"
+        },
+        "shipping": {
+          "type": "number",
+          "description": "Shipping fee in USD"
+        },
+        "total": {
+          "type": "number",
+          "description": "Grand total in USD"
+        },
+        "promoCode": {
+          "type": "string",
+          "description": "Applied promo code"
+        },
+        "orderDate": {
+          "type": "string",
+          "description": "Formatted date of order placement"
+        },
+        "currentStage": {
+          "type": "number",
+          "description": "Workshop pipeline stage index (1-5)"
+        },
+        "progressPercent": {
+          "type": "number",
+          "description": "Workshop progress percentage"
         },
         "status": {
           "type": "string",
-          "enum": [
-            "Received",
-            "Under Review",
-            "Scheduled for Interview",
-            "Rejected",
-            "Accepted"
-          ],
-          "description": "Current status of the application"
+          "enum": ["Received", "Timber Milling", "Joinery & Sanding", "Hardwax Finishing", "Dispatched", "Delivered"],
+          "description": "Current status of handcrafted production"
         },
-        "ref": {
+        "createdAt": {
           "type": "string",
-          "pattern": "^INT-\\d{6}$",
-          "description": "Unique reference ID"
+          "format": "date-time",
+          "description": "Timestamp of order creation"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp of latest update"
+        }
+      },
+      "required": ["orderId", "customerName", "phoneNumber", "address", "total"]
+    },
+    "inquiries": {
+      "title": "Workshop Inquiry",
+      "description": "Showroom inquiries, timber swatch requests, and custom commissions.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Inquirer's full name"
+        },
+        "emailOrPhone": {
+          "type": "string",
+          "description": "Contact phone, email, or Telegram handle"
+        },
+        "subject": {
+          "type": "string",
+          "description": "Subject of inquiry"
+        },
+        "message": {
+          "type": "string",
+          "description": "Message content"
         },
         "createdAt": {
           "type": "string",
           "format": "date-time",
           "description": "Creation timestamp"
-        },
-        "updatedAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Last update timestamp"
         }
       },
-      "required": [
-        "fullname",
-        "email",
-        "status",
-        "ref",
-        "createdAt",
-        "updatedAt"
-      ]
+      "required": ["name", "emailOrPhone", "message"]
+    },
+    "newsletter_subscribers": {
+      "title": "Newsletter Subscriber",
+      "description": "Email subscribers for studio batch announcements and woodworking guides.",
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "format": "email",
+          "description": "Subscriber email address"
+        },
+        "subscribedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Subscription timestamp"
+        }
+      },
+      "required": ["email"]
     },
     "runtime_errors": {
       "title": "Runtime Error Log",
@@ -85,21 +151,29 @@
         "stack": { "type": "string" },
         "url": { "type": "string" },
         "userAgent": { "type": "string" },
-        "component": { "type": "string", "description": "React component or module name" },
+        "component": { "type": "string" },
         "severity": { "type": "string", "enum": ["error", "warning", "fatal"] },
         "timestamp": { "type": "string", "format": "date-time" }
       },
-      "required": ["message", "timestamp", "severity"]
+      "required": ["message", "severity"]
     }
   },
   "firestore": {
-    "/internship_applications/{applicationId}": {
-      "schema": "internship_applications",
-      "description": "Root collection for internship applications"
+    "/orders/{orderId}": {
+      "schema": "orders",
+      "description": "Collection of all placed customer orders"
+    },
+    "/inquiries/{inquiryId}": {
+      "schema": "inquiries",
+      "description": "Collection of incoming studio inquiries and swatch requests"
+    },
+    "/newsletter_subscribers/{subscriberId}": {
+      "schema": "newsletter_subscribers",
+      "description": "Collection of newsletter subscriber emails"
     },
     "/runtime_errors/{errorId}": {
       "schema": "runtime_errors",
-      "description": "Global error logs for proactive monitoring"
+      "description": "Production client error diagnostics log"
     }
   }
 }

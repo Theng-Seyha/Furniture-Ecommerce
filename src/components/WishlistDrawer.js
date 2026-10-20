@@ -11,6 +11,7 @@ import {
   RotateCcw,
 } from 'lucide-react';
 import { useCart } from '../context/CartContext';
+import { useBodyScrollLock } from '../hooks/useBodyScrollLock';
 
 /**
  * Clean & Responsive Wishlist / Saved Items Drawer
@@ -29,6 +30,9 @@ export const WishlistDrawer = () => {
     setSelectedCategory,
     showToast,
   } = useCart();
+
+  // Lock background scroll when wishlist drawer is open
+  useBodyScrollLock(isWishlistOpen);
 
   const handleShareWishlist = () => {
     try {
@@ -72,7 +76,7 @@ export const WishlistDrawer = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setIsWishlistOpen(false)}
-            className="fixed inset-0 bg-stone-950/60 backdrop-blur-xs transition-opacity"
+            className="fixed inset-0 bg-stone-950/60 dark:bg-black/75 backdrop-blur-md transition-opacity"
             aria-hidden="true"
           />
 
@@ -83,10 +87,10 @@ export const WishlistDrawer = () => {
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'spring', damping: 28, stiffness: 280 }}
-              className="w-full sm:w-[440px] md:w-[480px] bg-[#FAF8F5] dark:bg-[#161513] text-stone-900 dark:text-stone-100 shadow-2xl flex flex-col border-l border-stone-200/80 dark:border-stone-800/80 h-full"
+              className="w-full sm:w-[440px] md:w-[480px] bg-[#FAF8F5] dark:bg-[#161513] text-stone-900 dark:text-stone-100 shadow-2xl flex flex-col border-l border-stone-200/80 dark:border-stone-800/80 h-full overflow-hidden overscroll-contain"
             >
               {/* 1. Header */}
-              <div className="px-4 sm:px-6 py-4 sm:py-5 border-b border-stone-200/70 dark:border-stone-800/80 bg-white/70 dark:bg-[#191816]/70 backdrop-blur-md flex items-center justify-between gap-3 shrink-0">
+              <div className="px-4 sm:px-6 py-4 sm:py-5 border-b border-stone-200/70 dark:border-stone-800/80 bg-[#FAF8F5] dark:bg-[#161513] flex items-center justify-between gap-3 shrink-0">
                 <div className="flex items-center gap-2.5">
                   <div className="w-8 h-8 rounded-full bg-rose-50 dark:bg-rose-950/60 border border-rose-200/60 dark:border-rose-900/60 flex items-center justify-center text-rose-600 dark:text-rose-400">
                     <Heart className="w-4 h-4 fill-current" />
@@ -264,7 +268,7 @@ export const WishlistDrawer = () => {
 
               {/* 3. Footer Summary & Primary Action */}
               {wishlist.length > 0 && (
-                <div className="p-4 sm:p-5 border-t border-stone-200/80 dark:border-stone-800/80 bg-white/80 dark:bg-[#191816]/80 backdrop-blur-md space-y-3 shrink-0 pb-[calc(1.25rem+env(safe-area-inset-bottom,0px))]">
+                <div className="p-4 sm:p-5 border-t border-stone-200/80 dark:border-stone-800/80 bg-[#FAF8F5] dark:bg-[#161513] space-y-3 shrink-0 pb-[calc(1.25rem+env(safe-area-inset-bottom,0px))]">
                   {/* Summary line */}
                   <div className="flex items-center justify-between text-xs text-stone-600 dark:text-stone-300">
                     <span className="flex items-center gap-1.5">

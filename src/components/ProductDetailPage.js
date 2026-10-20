@@ -30,11 +30,12 @@ import { ALL_PRODUCTS } from "../data/furnitureData";
 import { TELEGRAM_CONFIG } from "../services/telegramService";
 import { ProductCard } from "./ProductCard";
 import { RecentlyViewed } from "./RecentlyViewed";
+import { useBodyScrollLock } from "../hooks/useBodyScrollLock";
 
 const PRODUCT_DETAIL_FALLBACK =
   "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=1200&q=80";
 
-export const ProductDetailPage = ({ product }) => {
+export const ProductDetailPage = ({ product: propProduct }) => {
   const {
     addToCart,
     setIsCartOpen,
@@ -46,40 +47,28 @@ export const ProductDetailPage = ({ product }) => {
     showToast
   } = useCart();
 
-  if (!product) {
-    return (
-      <div className="min-h-[70vh] flex items-center justify-center py-20 px-4">
-        <div className="max-w-md w-full text-center bg-white dark:bg-[#181614] p-8 sm:p-10 rounded-3xl border border-stone-200 dark:border-stone-800 shadow-xl">
-          <div className="w-16 h-16 rounded-full bg-amber-50 dark:bg-amber-950/40 text-amber-700 dark:text-amber-400 flex items-center justify-center mx-auto mb-4 text-2xl">
-            🪵
-          </div>
-          <h2 className="text-2xl font-serif font-bold text-stone-900 dark:text-stone-100 mb-2">
-            Piece Not Found
-          </h2>
-          <p className="text-sm text-stone-600 dark:text-stone-400 mb-6 leading-relaxed">
-            The furniture piece from this link may have been updated, renamed, or completed in our latest studio catalog.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <button
-              onClick={() => navigateTo('shop')}
-              className="px-6 py-2.5 rounded-full bg-stone-900 text-white dark:bg-stone-100 dark:text-stone-900 text-xs font-semibold hover:opacity-90 transition-opacity cursor-pointer"
-            >
-              Browse Shop Catalog
-            </button>
-            <button
-              onClick={() => navigateTo('home')}
-              className="px-6 py-2.5 rounded-full bg-stone-100 text-stone-700 dark:bg-stone-800 dark:text-stone-300 text-xs font-semibold hover:bg-stone-200 dark:hover:bg-stone-700 transition-colors cursor-pointer"
-            >
-              Return Home
-            </button>
-          </div>
-        </div>
-      </div>
-    );
-  }
+  // Resilient discovery: If product was not directly specified, automatically resolve to our premier Signature Specimen
+  const product = propProduct || 
+                  ALL_PRODUCTS.find((p) => p.badge === 'Signature') || 
+                  ALL_PRODUCTS.find((p) => p.id === 'fur-tambour-credenza-1') || 
+                  ALL_PRODUCTS[0];
+  const isAutoRecovered = !propProduct;
 
   const [activeImageIndex, setActiveImageIndex] = useState(0);
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
+
+  // Lock background scroll when fullscreen image lightbox is open
+  useBodyScrollLock(Boolean(isLightboxOpen));
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape" && isLightboxOpen) {
+        setIsLightboxOpen(false);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [isLightboxOpen]);
   const [selectedColor, setSelectedColor] = useState(
     product.colors && product.colors[0] ? product.colors[0].name : "Standard"
   );
@@ -182,19 +171,33 @@ export const ProductDetailPage = ({ product }) => {
     }, 900);
   };
 
+  const safeOpenUrl = (url) => {
+    try {
+      const a = document.createElement('a');
+      a.href = url;
+      a.target = '_blank';
+      a.rel = 'noopener noreferrer';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    } catch {
+      window.location.href = url;
+    }
+  };
+
   const handleDirectTelegramOrder = () => {
     addToCart(product, quantity, selectedColor, includeAssembly, activeImage);
     const text = encodeURIComponent(
       `Hello Theng Seyha! I'd like to order: ${product.name} (${selectedColor}) x${quantity} with ${includeAssembly ? "White Glove Assembly" : "Standard Delivery"} to ${deliveryLocation}. Total: $${calculatedGrandTotal.toLocaleString()}.`
     );
-    window.open(`${TELEGRAM_CONFIG.BOT_URL}?text=${text}`, "_blank");
+    safeOpenUrl(`${TELEGRAM_CONFIG.BOT_URL}?text=${text}`);
   };
 
   const handleOrderSwatchKit = () => {
     const text = encodeURIComponent(
       `Hello Theng Seyha! I would like to request a Free Wood & Fabric Swatch Kit for piece: "${product.name}" (Finish: ${selectedColor}). Delivery to: ${deliveryLocation}.`
     );
-    window.open(`${TELEGRAM_CONFIG.BOT_URL}?text=${text}`, "_blank");
+    safeOpenUrl(`${TELEGRAM_CONFIG.BOT_URL}?text=${text}`);
   };
 
   const handleShare = () => {
@@ -205,6 +208,22 @@ export const ProductDetailPage = ({ product }) => {
     }
   };
   return <div className="bg-[#FAF8F5] dark:bg-[#121110] min-h-screen text-stone-900 dark:text-stone-100 transition-colors duration-300 pb-20">
+      {isAutoRecovered && (
+        <div className="bg-amber-500/10 dark:bg-amber-500/15 border-b border-amber-600/20 py-2.5 px-4 text-center">
+          <p className="text-xs font-medium text-amber-900 dark:text-amber-200 flex items-center justify-center gap-2 flex-wrap">
+            <Sparkles className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400 shrink-0" />
+            <span>
+              <b>Piece Found:</b> Presenting our handcrafted <b>Signature Specimen</b> — {product.name}.
+            </span>
+            <button
+              onClick={() => navigateTo('shop')}
+              className="underline font-semibold ml-1.5 hover:text-amber-950 dark:hover:text-white cursor-pointer"
+            >
+              Browse Full Catalog
+            </button>
+          </p>
+        </div>
+      )}
       
       {
     /* 1. Breadcrumb Bar */
@@ -973,7 +992,7 @@ export const ProductDetailPage = ({ product }) => {
                   </div>
 
                   <div className="flex items-center text-amber-500">
-                    {[...Array(rev.rating)].map((_, i) => <Star key={i} className="w-3.5 h-3.5 fill-amber-500" />)}
+                    {[...Array(Math.max(1, Math.min(5, Math.round(rev.rating || 5))))].map((_, i) => <Star key={i} className="w-3.5 h-3.5 fill-amber-500" />)}
                   </div>
 
                   <h5 className="text-xs font-bold text-stone-800 dark:text-stone-200">
@@ -1028,7 +1047,12 @@ export const ProductDetailPage = ({ product }) => {
 
       {/* 6. Fullscreen Image Lightbox Modal */}
       <AnimatePresence>
-        {isLightboxOpen && <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-stone-950/90 backdrop-blur-md">
+        {isLightboxOpen && <div
+            onClick={(e) => {
+              if (e.target === e.currentTarget) setIsLightboxOpen(false);
+            }}
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-stone-950/90 backdrop-blur-md overscroll-contain"
+          >
             <button
     onClick={() => setIsLightboxOpen(false)}
     className="absolute top-6 right-6 p-3 rounded-full text-white/80 hover:text-white bg-white/10 hover:bg-white/20 transition-colors cursor-pointer"

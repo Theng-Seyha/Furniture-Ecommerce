@@ -1,14 +1,29 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { ArrowRight, Calendar, Clock, X } from "lucide-react";
 import { BLOG_POSTS } from "../data/furnitureData";
 import { ScrollReveal } from "./ScrollReveal";
+import { useBodyScrollLock } from "../hooks/useBodyScrollLock";
 
 const BLOG_FALLBACK_IMAGE =
   "https://images.unsplash.com/photo-1516455590571-18256e5bb9ff?auto=format&fit=crop&w=800&q=80";
 
 export const BlogSection = () => {
   const [activePost, setActivePost] = useState(null);
+
+  // Lock background scroll when reading an article
+  useBodyScrollLock(Boolean(activePost));
+
+  // Close on Escape key
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape" && activePost) {
+        setActivePost(null);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [activePost]);
   return (
     <section id="blog" className="py-14 sm:py-24 bg-stone-100/40 dark:bg-stone-900/20 scroll-mt-20 sm:scroll-mt-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -98,12 +113,17 @@ export const BlogSection = () => {
       {/* Article Detail Reading Modal */}
       <AnimatePresence>
         {activePost && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-stone-950/60 backdrop-blur-xs">
+          <div 
+            onClick={(e) => {
+              if (e.target === e.currentTarget) setActivePost(null);
+            }}
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-stone-950/60 dark:bg-black/75 backdrop-blur-md overflow-y-auto overscroll-contain"
+          >
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
-              className="bg-white dark:bg-stone-900 max-w-2xl w-full max-h-[90vh] overflow-y-auto rounded-3xl p-6 sm:p-8 shadow-2xl border border-stone-200 dark:border-stone-800"
+              className="bg-white dark:bg-stone-900 max-w-2xl w-full max-h-[90vh] overflow-y-auto overscroll-contain rounded-3xl p-6 sm:p-8 shadow-2xl border border-stone-200 dark:border-stone-800"
             >
               {/* Modal Top Header Bar - Placed Cleanly UP ABOVE the image */}
               <div className="flex items-center justify-between pb-3.5 mb-5 border-b border-stone-200/80 dark:border-stone-800">

@@ -1,9 +1,9 @@
-import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
+import { collection, addDoc } from 'firebase/firestore';
 import { db } from './firebase'; 
 
 /**
  * Monitoring Service
- * Captured and reports runtime errors to Firestore for proactive debugging.
+ * Captures and reports runtime errors to Firestore for proactive debugging.
  */
 class MonitoringService {
   static async reportError(error, context = {}) {
@@ -12,20 +12,16 @@ class MonitoringService {
     try {
       const errorData = {
         message: error?.message || String(error) || 'Unknown error',
-        stack: error?.stack || null,
+        severity: context.severity || 'error',
+        component: context.component || 'Global',
         url: window.location?.href || '',
         userAgent: navigator?.userAgent || '',
-        component: context.component || 'Global',
-        severity: context.severity || 'error',
-        timestamp: new Date().toISOString(),
-        additionalInfo: context.info || null
+        stack: error?.stack || null,
+        timestamp: new Date().toISOString()
       };
 
       if (db) {
-        await addDoc(collection(db, 'runtime_errors'), {
-          ...errorData,
-          timestamp: serverTimestamp ? serverTimestamp() : new Date().toISOString()
-        }).catch(() => {
+        await addDoc(collection(db, 'runtime_errors'), errorData).catch(() => {
           // Quietly ignore network failures to avoid recursive error loops
         });
       }

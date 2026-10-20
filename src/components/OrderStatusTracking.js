@@ -20,6 +20,7 @@ import {
 import { TELEGRAM_CONFIG } from '../services/telegramService';
 import { useCart } from '../context/CartContext';
 import { HANDCRAFTED_STAGES, SAMPLE_ORDERS } from '../data/workshopStages';
+import { fetchOrder } from '../services/firebase';
 
 export { HANDCRAFTED_STAGES, SAMPLE_ORDERS };
 
@@ -58,9 +59,41 @@ export const OrderStatusTracking = ({ initialOrderId }) => {
     }
   }, [initialOrderId]);
 
-  const handleLookup = (id) => {
+  const handleLookup = async (id) => {
     const cleanId = id.trim().toUpperCase();
     setSearchInput(cleanId);
+
+    // 0. Check real-time Firestore database
+    try {
+      const cloudOrder = await fetchOrder(cleanId);
+      if (cloudOrder) {
+        const stageIdx = Math.max(1, Math.min(5, cloudOrder.currentStage || 1));
+        const dynamicOrder = {
+          orderId: cloudOrder.orderId,
+          customerName: cloudOrder.customerName || 'Studio Client',
+          productName: cloudOrder.items?.[0]?.name || 'Handcrafted Solid Wood Furniture',
+          material: 'Kiln-Dried Hardwood & Sustainable Joinery',
+          destination: `${cloudOrder.address || 'Phnom Penh'}, ${cloudOrder.deliveryCity || 'Cambodia'}`,
+          orderDate: cloudOrder.orderDate || 'Recent',
+          estimatedDelivery: '5–7 Business Days',
+          currentStage: stageIdx,
+          progressPercent: cloudOrder.progressPercent || Math.min(100, stageIdx * 20),
+          artisanLead: 'Theng Seyha (Studio Intake)',
+          workshopBay: 'Intake Bay - Queue Active',
+          phoneNumber: cloudOrder.phoneNumber,
+          telegramUsername: cloudOrder.telegramUsername,
+          logs: [
+            { time: 'Live Bench Log', note: `Status: ${cloudOrder.status || 'Received'}. Workshop tracking synchronized.` }
+          ]
+        };
+        setActiveOrder(dynamicOrder);
+        setSelectedStageIndex(stageIdx - 1);
+        if (showToast) showToast(`Loaded live order ${cleanId}`);
+        return;
+      }
+    } catch (err) {
+      console.warn('Firestore lookup notice:', err);
+    }
 
     if (SAMPLE_ORDERS[cleanId]) {
       const ord = SAMPLE_ORDERS[cleanId];

@@ -229,11 +229,117 @@ let state = {
 // 4. INITIALIZATION
 document.addEventListener('DOMContentLoaded', () => {
   initTheme();
+  initNavbarInteractions();
   initEventListeners();
   renderProducts();
   renderSignature();
   updateCartUI();
 });
+
+// 4b. NAVBAR DUAL-LAYER HIGHLIGHT & LOCKED ACTIVE MANAGER (HTML/CSS/JS)
+function initNavbarInteractions() {
+  const navContainer = document.getElementById('nav-links');
+  const glider = document.getElementById('nav-hover-glider');
+  
+  // Specifically select all navbar links
+  const links = document.querySelectorAll('.navbar .nav-link');
+  if (links.length === 0) return;
+
+  // Enforces single active state: explicitly sets 'active' class on selected link
+  function setActiveLink(activeEl) {
+    links.forEach(link => link.classList.remove('active'));
+    activeEl.classList.add('active');
+    // Hide hover glider when active item changes or is clicked
+    if (glider) {
+      glider.style.opacity = '0';
+    }
+  }
+
+  // Smoothly positions hover glider over hovered inactive link
+  function moveGliderTo(link) {
+    if (link.classList.contains('active')) {
+      // Never render hover glider over already-locked active button
+      if (glider) glider.style.opacity = '0';
+      return;
+    }
+    if (!glider || !navContainer) return;
+    const navRect = navContainer.getBoundingClientRect();
+    const linkRect = link.getBoundingClientRect();
+
+    const left = linkRect.left - navRect.left;
+    const top = linkRect.top - navRect.top;
+
+    glider.style.width = `${linkRect.width}px`;
+    glider.style.height = `${linkRect.height}px`;
+    glider.style.transform = `translate3d(${left}px, ${top}px, 0)`;
+    glider.style.opacity = '1';
+  }
+
+  links.forEach(link => {
+    link.addEventListener('mouseenter', () => {
+      moveGliderTo(link);
+    });
+
+    // Explicitly apply 'active' class on click to lock active background styling
+    link.addEventListener('click', function (e) {
+      setActiveLink(this);
+    });
+  });
+
+  if (navContainer) {
+    navContainer.addEventListener('mouseleave', () => {
+      if (glider) glider.style.opacity = '0';
+    });
+  }
+
+  // Scroll spy to keep active nav button in sync with viewport sections
+  let isClickScrolling = false;
+  let clickTimeout = null;
+
+  links.forEach(link => {
+    link.addEventListener('click', () => {
+      isClickScrolling = true;
+      if (clickTimeout) clearTimeout(clickTimeout);
+      clickTimeout = setTimeout(() => {
+        isClickScrolling = false;
+      }, 1000);
+    });
+  });
+
+  const sectionIds = ['hero', 'catalog', 'signature', 'about', 'reviews', 'contact'];
+  window.addEventListener('scroll', () => {
+    if (isClickScrolling) return;
+
+    const scrollY = window.scrollY || window.pageYOffset;
+    const windowHeight = window.innerHeight;
+    const docHeight = document.documentElement.scrollHeight;
+
+    // Bottom of page check
+    if (scrollY + windowHeight >= docHeight - 40) {
+      const lastLink = navContainer.querySelector(`a[href="#${sectionIds[sectionIds.length - 1]}"]`);
+      if (lastLink && !lastLink.classList.contains('active')) {
+        links.forEach(l => l.classList.remove('active'));
+        lastLink.classList.add('active');
+      }
+      return;
+    }
+
+    const triggerLine = 140;
+    const scrollPos = scrollY + triggerLine;
+
+    for (let i = sectionIds.length - 1; i >= 0; i--) {
+      const sec = document.getElementById(sectionIds[i]);
+      if (sec && sec.offsetTop <= scrollPos) {
+        const targetLink = navContainer.querySelector(`a[href="#${sectionIds[i]}"]`);
+        if (targetLink && !targetLink.classList.contains('active')) {
+          links.forEach(l => l.classList.remove('active'));
+          targetLink.classList.add('active');
+        }
+        break;
+      }
+    }
+  }, { passive: true });
+}
 
 // 5. THEME SWITCHER (Light / Dark Mode)
 function initTheme() {
@@ -311,6 +417,15 @@ function initEventListeners() {
     showToast('Filters reset to show all pieces');
   });
 
+  // Mobile Menu Toggle
+  const mobileToggle = document.getElementById('mobile-toggle');
+  const navLinks = document.getElementById('nav-links');
+  if (mobileToggle && navLinks) {
+    mobileToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('mobile-open');
+    });
+  }
+
   // Cart Drawer Triggers
   const cartBtn = document.getElementById('cart-btn');
   const cartBackdrop = document.getElementById('cart-drawer-backdrop');
@@ -324,12 +439,10 @@ function initEventListeners() {
 
   // Clear Cart Button
   document.getElementById('clear-cart-btn').addEventListener('click', () => {
-    if (confirm('Are you sure you want to clear your cart?')) {
-      state.cart = [];
-      saveCart();
-      updateCartUI();
-      showToast('Cart cleared');
-    }
+    state.cart = [];
+    saveCart();
+    updateCartUI();
+    showToast('Cart cleared');
   });
 
   // Promo Code Apply Button
@@ -354,7 +467,7 @@ function initEventListeners() {
   // Proceed to Checkout
   document.getElementById('proceed-checkout-btn').addEventListener('click', () => {
     if (state.cart.length === 0) {
-      alert('Your cart is empty. Add items before checking out.');
+      showToast('Your cart is empty. Add pieces before checking out.');
       return;
     }
     closeCartDrawer();

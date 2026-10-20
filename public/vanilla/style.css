@@ -144,20 +144,92 @@ body.dark-theme .navbar {
 }
 
 .nav-links {
+  position: relative;
   display: flex;
   align-items: center;
-  gap: 28px;
+  gap: 4px;
+  background-color: rgba(231, 229, 228, 0.4);
+  padding: 4px 6px;
+  border-radius: 14px;
+  border: 1px solid var(--border-color);
+}
+
+body.dark-theme .nav-links {
+  background-color: rgba(36, 34, 31, 0.6);
+  border-color: var(--border-color);
+}
+
+/* Floating Hover Glider (Translucent pill following cursor between inactive buttons) */
+.nav-hover-glider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-radius: 10px;
+  background-color: rgba(214, 211, 209, 0.7);
+  border: 1px solid rgba(168, 162, 158, 0.3);
+  pointer-events: none;
+  opacity: 0;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              width 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              height 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.2s ease;
+  z-index: 1;
+}
+
+body.dark-theme .nav-hover-glider {
+  background-color: rgba(46, 43, 39, 0.85);
+  border-color: rgba(87, 83, 78, 0.4);
 }
 
 .nav-link {
-  font-size: 14px;
-  font-weight: 500;
+  position: relative;
+  z-index: 2;
+  font-size: 13px;
+  font-weight: 600;
   color: var(--text-muted);
-  transition: color var(--transition-fast);
+  text-decoration: none;
+  padding: 6px 14px;
+  border-radius: 10px;
+  /* Subtle transition delay on background, radius & shadow to smoothly anchor focus */
+  transition: color 0.18s cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 0.24s cubic-bezier(0.16, 1, 0.3, 1) 35ms,
+              border-radius 0.24s cubic-bezier(0.16, 1, 0.3, 1) 35ms,
+              box-shadow 0.24s cubic-bezier(0.16, 1, 0.3, 1) 35ms,
+              transform 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+  white-space: nowrap;
+  user-select: none;
 }
 
-.nav-link:hover, .nav-link.active {
+.nav-link:hover {
   color: var(--text-main);
+}
+
+/* Locked Active Pill: Specifically target .nav-link.active to lock the background styling, overriding any hover effects */
+/* Current screen size (Desktop): Distinct 13.5px anchor radius that visually locks the active element */
+.nav-link.active,
+.nav-link.active:hover,
+.nav-link.active:focus,
+.navbar .nav-link.active,
+.navbar .nav-link.active:hover,
+.navbar .nav-link.active:focus {
+  color: #FFFFFF !important;
+  background-color: #1C1917 !important;
+  border-radius: 13.5px !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08) !important;
+  transition-delay: 0ms !important;
+}
+
+body.dark-theme .nav-link.active,
+body.dark-theme .nav-link.active:hover,
+body.dark-theme .nav-link.active:focus,
+body.dark-theme .navbar .nav-link.active,
+body.dark-theme .navbar .nav-link.active:hover,
+body.dark-theme .navbar .nav-link.active:focus {
+  color: #121110 !important;
+  background-color: #F5F2EB !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) !important;
 }
 
 .nav-actions {
@@ -1781,13 +1853,98 @@ body.dark-theme .tg-banner {
   }
 }
 
+/* Tablet Screens (769px to 1024px): Distinct calibrated border-radius with anchor focus */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .navbar .nav-link,
+  .nav-link {
+    font-size: 12px;
+    padding: 5px 11px;
+    border-radius: 9px;
+    transition: color 0.18s cubic-bezier(0.16, 1, 0.3, 1),
+                background-color 0.22s cubic-bezier(0.16, 1, 0.3, 1) 30ms,
+                border-radius 0.22s cubic-bezier(0.16, 1, 0.3, 1) 30ms,
+                box-shadow 0.22s cubic-bezier(0.16, 1, 0.3, 1) 30ms;
+  }
+
+  .navbar .nav-link.active,
+  .nav-link.active {
+    border-radius: 12px !important;
+    box-shadow: 0 2px 6px -1px rgba(0, 0, 0, 0.16) !important;
+  }
+}
+
 @media (max-width: 768px) {
   .nav-links {
     display: none;
+    position: absolute;
+    top: 100%;
+    left: 16px;
+    right: 16px;
+    flex-direction: column;
+    align-items: stretch;
+    background-color: var(--bg-surface);
+    padding: 12px;
+    border-radius: 16px;
+    box-shadow: var(--shadow-xl);
+    border: 1px solid var(--border-color);
+    z-index: 100;
+    gap: 4px;
+  }
+
+  .nav-links.mobile-open {
+    display: flex;
+  }
+
+  /* Mobile Navbar Links: Distinct compact border-radius with anchor focus */
+  .navbar .nav-link,
+  .nav-link {
+    font-size: 12px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    transition: color 0.18s cubic-bezier(0.16, 1, 0.3, 1),
+                background-color 0.2s cubic-bezier(0.16, 1, 0.3, 1) 20ms,
+                border-radius 0.2s cubic-bezier(0.16, 1, 0.3, 1) 20ms,
+                box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1) 20ms;
+  }
+
+  .navbar .nav-link.active,
+  .nav-link.active {
+    border-radius: 10px !important;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.14) !important;
+  }
+
+  /* Smaller, ultra-clean Cart Button on Mobile */
+  .cart-btn {
+    padding: 4px !important;
+    width: 32px;
+    height: 32px;
+    border-radius: var(--radius-sm);
+  }
+
+  .cart-btn svg {
+    width: 15px;
+    height: 15px;
+  }
+
+  .cart-badge {
+    top: -2px;
+    right: -2px;
+    width: 15px;
+    height: 15px;
+    font-size: 8.5px;
+    border: 1.5px solid var(--bg-surface);
   }
 
   .mobile-menu-btn {
     display: inline-flex;
+    padding: 5px;
+    width: 32px;
+    height: 32px;
+  }
+
+  .mobile-menu-btn svg {
+    width: 18px;
+    height: 18px;
   }
 
   .telegram-pill-btn {

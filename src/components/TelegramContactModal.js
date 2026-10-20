@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import {
   X,
@@ -21,6 +21,8 @@ import {
   getOrderStatusFromShop,
   TELEGRAM_CONFIG
 } from "../services/telegramService";
+import { saveInquiry } from "../services/firebase";
+import { useBodyScrollLock } from "../hooks/useBodyScrollLock";
 
 export const TelegramContactModal = () => {
   const { 
@@ -30,6 +32,22 @@ export const TelegramContactModal = () => {
     navigateTo,
     notifyTelegramResult 
   } = useCart();
+
+  // Lock background scroll when Telegram contact modal is open
+  useBodyScrollLock(Boolean(isTelegramModalOpen));
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape" && isTelegramModalOpen) {
+        setIsTelegramModalOpen(false);
+        setSentSuccess(false);
+        setStatusResult(null);
+        setStatusError("");
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [isTelegramModalOpen, setIsTelegramModalOpen]);
 
   // Active Tab: 'inquiry' or 'status'
   const [activeTab, setActiveTab] = useState("status");
@@ -85,12 +103,14 @@ export const TelegramContactModal = () => {
     }
     if (!contact.trim() || !message.trim()) return;
     setIsSending(true);
-    const result = await sendInquiryToTelegram({
+    const inquiryPayload = {
       name: trimmedName,
       emailOrPhone: contact.trim(),
       subject,
       message: message.trim()
-    });
+    };
+    saveInquiry(inquiryPayload).catch((err) => console.warn('Inquiry save notice:', err));
+    const result = await sendInquiryToTelegram(inquiryPayload);
     setIsSending(false);
     setSentSuccess(true);
     notifyTelegramResult(result.sent, 'Inquiry');
@@ -119,12 +139,17 @@ export const TelegramContactModal = () => {
   return (
     <AnimatePresence>
       {isTelegramModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-stone-950/65 backdrop-blur-xs overflow-y-auto">
+        <div
+          onClick={(e) => {
+            if (e.target === e.currentTarget) handleClose();
+          }}
+          className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-stone-950/60 dark:bg-black/75 backdrop-blur-md overflow-y-auto overscroll-contain"
+        >
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.95 }}
-            className="bg-white dark:bg-stone-900 max-w-xl w-full rounded-3xl p-6 sm:p-7 shadow-2xl border border-stone-200 dark:border-stone-800 relative text-stone-900 dark:text-stone-100 max-h-[92vh] overflow-y-auto"
+            className="bg-white dark:bg-stone-900 max-w-xl w-full rounded-3xl p-6 sm:p-7 shadow-2xl border border-stone-200 dark:border-stone-800 relative text-stone-900 dark:text-stone-100 max-h-[92vh] overflow-y-auto overscroll-contain"
           >
         {/* Close Button */}
         <button

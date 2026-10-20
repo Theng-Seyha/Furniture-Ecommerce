@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { X, Send, CheckCircle2, Loader2, ExternalLink, Wrench, Printer, FileText, Clock, AlertCircle, PackageCheck } from "lucide-react";
 import { useCart } from "../context/CartContext";
 import { sendOrderToTelegram, TELEGRAM_CONFIG } from "../services/telegramService";
+import { saveOrder } from "../services/firebase";
+import { useBodyScrollLock } from "../hooks/useBodyScrollLock";
 
 export const CheckoutModal = () => {
   const {
@@ -33,6 +35,21 @@ export const CheckoutModal = () => {
   const [paymentMethod, setPaymentMethod] = useState("Telegram Pay / ABA");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [orderResult, setOrderResult] = useState(null);
+
+  // Lock background scroll when checkout modal is open
+  useBodyScrollLock(Boolean(isCheckoutOpen));
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape" && isCheckoutOpen) {
+        setIsCheckoutOpen(false);
+        setOrderResult(null);
+        setValidationError("");
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [isCheckoutOpen, setIsCheckoutOpen]);
 
   // 1. Strict Name input handler: contains ONLY text / letters (never numbers)
   const handleNameChange = (e) => {
@@ -131,6 +148,11 @@ export const CheckoutModal = () => {
       recordNewOrder(completedResult);
     }
 
+    // Persist order to Firestore database
+    saveOrder(completedResult).catch((err) => {
+      console.warn('Firestore order save notice:', err);
+    });
+
     setOrderResult(completedResult);
     notifyTelegramResult(result.sent, 'Order');
     clearCart();
@@ -149,12 +171,17 @@ export const CheckoutModal = () => {
   return (
     <AnimatePresence>
       {isCheckoutOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-stone-950/65 backdrop-blur-xs overflow-y-auto overflow-x-hidden">
+        <div
+          onClick={(e) => {
+            if (e.target === e.currentTarget) handleClose();
+          }}
+          className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-stone-950/60 dark:bg-black/75 backdrop-blur-md overflow-y-auto overflow-x-hidden overscroll-contain"
+        >
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.95 }}
-            className="bg-white dark:bg-stone-900 max-w-xl w-full max-h-[92vh] overflow-y-auto overflow-x-hidden rounded-3xl p-5 sm:p-7 shadow-2xl border border-stone-200 dark:border-stone-800 relative text-stone-900 dark:text-stone-100 flex flex-col"
+            className="bg-white dark:bg-stone-900 max-w-xl w-full max-h-[92vh] overflow-y-auto overflow-x-hidden overscroll-contain rounded-3xl p-5 sm:p-7 shadow-2xl border border-stone-200 dark:border-stone-800 relative text-stone-900 dark:text-stone-100 flex flex-col"
           >
             {/* Modal Dedicated Top Header Bar - Keeps Close Button (X) completely clean and separated out of the text */}
             <div className="flex items-center justify-between pb-3.5 mb-4 border-b border-stone-100 dark:border-stone-800/80 shrink-0">

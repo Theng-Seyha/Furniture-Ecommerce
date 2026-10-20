@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion } from "motion/react";
 import { MapPin, Phone, Clock, Send, CheckCircle2, MessageCircle, ExternalLink, Loader2, Search } from "lucide-react";
 import { sendInquiryToTelegram, TELEGRAM_CONFIG } from "../services/telegramService";
+import { saveInquiry } from "../services/firebase";
 import { useCart } from "../context/CartContext";
 export const ContactSection = () => {
   const { showToast, setIsTelegramModalOpen } = useCart();
@@ -27,12 +28,14 @@ export const ContactSection = () => {
       return;
     }
     setIsSubmitting(true);
-    const res = await sendInquiryToTelegram({
+    const inquiryPayload = {
       name: trimmedName,
       emailOrPhone: emailOrPhone.trim(),
       subject,
       message: message.trim()
-    });
+    };
+    saveInquiry(inquiryPayload).catch((err) => console.warn('Inquiry save notice:', err));
+    const res = await sendInquiryToTelegram(inquiryPayload);
     setIsSubmitting(false);
     setSubmittedResult(res);
     showToast("Inquiry sent to Theng Seyha via Telegram!");

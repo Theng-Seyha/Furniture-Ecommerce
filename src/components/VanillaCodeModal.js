@@ -1,7 +1,8 @@
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+import { useState, useEffect } from 'react';
+import { motion } from 'motion/react';
 import { X, ExternalLink, Code2, Check, Sparkles, Terminal, FileCode, Send } from 'lucide-react';
 import { TELEGRAM_CONFIG } from '../services/telegramService';
+import { useBodyScrollLock } from '../hooks/useBodyScrollLock';
 
 /**
  * VanillaCodeModal - Pure Vanilla JS Edition Showcase
@@ -10,6 +11,19 @@ import { TELEGRAM_CONFIG } from '../services/telegramService';
  */
 export const VanillaCodeModal = ({ isOpen, onClose }) => {
   const [copied, setCopied] = useState(false);
+
+  // Lock background scroll when vanilla showcase modal is open
+  useBodyScrollLock(Boolean(isOpen));
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape' && isOpen) {
+        onClose();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen, onClose]);
 
   if (!isOpen) return null;
 
@@ -42,16 +56,21 @@ export const VanillaCodeModal = ({ isOpen, onClose }) => {
   ];
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-stone-950/70 backdrop-blur-xs">
+    <div
+      onClick={(e) => {
+        if (e.target === e.currentTarget) onClose();
+      }}
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-stone-950/60 dark:bg-black/75 backdrop-blur-md overflow-y-auto overscroll-contain"
+    >
       <motion.div
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0, scale: 0.95 }}
-        className="bg-white dark:bg-stone-900 max-w-2xl w-full rounded-3xl p-6 sm:p-8 shadow-2xl border border-stone-200 dark:border-stone-800 relative text-stone-900 dark:text-stone-100 max-h-[90vh] overflow-y-auto"
+        className="bg-white dark:bg-stone-900 max-w-2xl w-full rounded-3xl p-6 sm:p-8 shadow-2xl border border-stone-200 dark:border-stone-800 relative text-stone-900 dark:text-stone-100 max-h-[90vh] overflow-y-auto overscroll-contain"
       >
         <button
           onClick={onClose}
-          className="absolute top-5 right-5 p-2 rounded-full text-stone-400 hover:text-stone-700 dark:hover:text-stone-200 transition-colors cursor-pointer"
+          className="absolute top-5 right-5 p-2 rounded-full text-stone-400 hover:text-stone-700 dark:hover:text-stone-200 hover:bg-stone-100 dark:hover:bg-stone-800 transition-colors cursor-pointer"
           aria-label="Close modal"
         >
           <X className="w-5 h-5" />

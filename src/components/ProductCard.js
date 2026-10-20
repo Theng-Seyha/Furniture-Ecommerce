@@ -124,12 +124,12 @@ export const ProductCard = ({
         {/* Badges (Stock & Editorial) */}
         <div className="absolute top-4 left-4 flex flex-col gap-1.5 pointer-events-none z-10">
           {product.badge && (
-            <span className="px-2.5 py-1 text-[9px] font-bold tracking-widest uppercase rounded-md bg-stone-900/90 dark:bg-white/95 backdrop-blur-sm text-white dark:text-stone-900 shadow-sm border border-white/10 dark:border-black/5">
+            <span className="px-2.5 py-1 text-[9px] font-bold tracking-widest uppercase rounded-md bg-stone-900 text-white dark:bg-stone-100 dark:text-stone-900 shadow-xs border border-stone-800 dark:border-stone-200">
               {product.badge}
             </span>
           )}
           {product.stockCount <= 4 && (
-            <span className="px-2 py-0.5 text-[9px] font-bold tracking-widest uppercase rounded-md bg-amber-600 text-white shadow-sm">
+            <span className="px-2 py-0.5 text-[9px] font-bold tracking-widest uppercase rounded-md bg-amber-600 text-white shadow-xs">
               Low Stock
             </span>
           )}
@@ -139,10 +139,10 @@ export const ProductCard = ({
         <button
           onClick={handleWishlistToggle}
           aria-label={wishlisted ? 'Remove from saved' : 'Save for later'}
-          className={`absolute top-4 right-4 z-20 w-9 h-9 rounded-full flex items-center justify-center transition-all backdrop-blur-sm cursor-pointer shadow-sm ${
+          className={`absolute top-4 right-4 z-20 w-9 h-9 rounded-full flex items-center justify-center transition-all cursor-pointer shadow-xs border ${
             wishlisted
-              ? 'bg-rose-50 dark:bg-rose-950/80 text-rose-600 dark:text-rose-400 scale-100'
-              : 'bg-white/90 dark:bg-stone-900/80 text-stone-600 dark:text-stone-300 opacity-90 sm:opacity-0 sm:group-hover:opacity-100 hover:bg-white dark:hover:bg-stone-800 hover:text-rose-600'
+              ? 'bg-rose-50 dark:bg-rose-950 text-rose-600 dark:text-rose-400 border-rose-200 dark:border-rose-800 scale-100'
+              : 'bg-white dark:bg-stone-900 text-stone-600 dark:text-stone-300 border-stone-200/90 dark:border-stone-700 opacity-95 sm:opacity-0 sm:group-hover:opacity-100 hover:bg-stone-50 dark:hover:bg-stone-800 hover:text-rose-600'
           }`}
         >
           <Heart
@@ -160,7 +160,7 @@ export const ProductCard = ({
                 e.stopPropagation();
                 setQuickViewProduct(product);
               }}
-              className="flex-1 py-2.5 rounded-xl bg-white/95 dark:bg-stone-800/95 text-stone-900 dark:text-stone-100 text-xs font-bold shadow-lg hover:bg-stone-100 dark:hover:bg-stone-700 transition-colors cursor-pointer border border-stone-200 dark:border-stone-700 flex items-center justify-center gap-2"
+              className="flex-1 py-2.5 rounded-xl bg-white dark:bg-stone-800 text-stone-900 dark:text-stone-100 text-xs font-bold shadow-md hover:bg-stone-100 dark:hover:bg-stone-700 transition-colors cursor-pointer border border-stone-200 dark:border-stone-700 flex items-center justify-center gap-2"
             >
               <Eye className="w-4 h-4" />
               <span>Details</span>
@@ -168,7 +168,7 @@ export const ProductCard = ({
 
             <button
               onClick={handleQuickAdd}
-              className={`w-12 h-10 rounded-xl shadow-lg transition-all flex items-center justify-center cursor-pointer border ${
+              className={`w-12 h-10 rounded-xl shadow-md transition-all flex items-center justify-center cursor-pointer border ${
                 justAdded
                   ? 'bg-emerald-600 text-white border-emerald-600'
                   : 'bg-stone-900 dark:bg-stone-100 text-white dark:text-stone-900 border-stone-900 dark:border-stone-100 hover:bg-amber-800 dark:hover:bg-amber-100'
@@ -186,7 +186,7 @@ export const ProductCard = ({
               e.stopPropagation();
               setQuickViewProduct(product);
             }}
-            className="w-8 h-8 rounded-full bg-white/95 dark:bg-stone-900/95 text-stone-800 dark:text-stone-200 shadow-md flex items-center justify-center"
+            className="w-8 h-8 rounded-full bg-white dark:bg-stone-900 text-stone-800 dark:text-stone-200 shadow-sm border border-stone-200 dark:border-stone-800 flex items-center justify-center"
           >
             <Eye className="w-3.5 h-3.5" />
           </button>

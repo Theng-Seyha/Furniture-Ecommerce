@@ -1,13 +1,27 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { ArrowRight, CheckCircle2, X } from "lucide-react";
 import { ScrollReveal } from "./ScrollReveal";
+import { useBodyScrollLock } from "../hooks/useBodyScrollLock";
 
 const CRAFT_FALLBACK_IMAGE =
-  "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=1200&q=80";
+  "https://images.unsplash.com/photo-1517705008128-361805f42e86?auto=format&fit=crop&w=1200&q=80";
 
 export const WhyChooseFur = () => {
   const [showStoryModal, setShowStoryModal] = useState(false);
+
+  // Lock background scroll when story modal is open
+  useBodyScrollLock(Boolean(showStoryModal));
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape" && showStoryModal) {
+        setShowStoryModal(false);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [showStoryModal]);
   const points = [
     {
       title: "Real Solid Hardwood",
@@ -96,8 +110,8 @@ export const WhyChooseFur = () => {
           >
             <div className="relative rounded-2xl md:rounded-3xl overflow-hidden shadow-xl bg-stone-200 dark:bg-stone-800 aspect-4/3 sm:aspect-5/4">
               <img
-                src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=1200&q=80"
-                alt="Fur furniture craftsmanship and design detail"
+                src="https://images.unsplash.com/photo-1517705008128-361805f42e86?auto=format&fit=crop&w=1200&q=80"
+                alt="Fur furniture craftsmanship and solid hardwood detail"
                 onError={(e) => {
                   e.currentTarget.src = CRAFT_FALLBACK_IMAGE;
                 }}
@@ -118,16 +132,22 @@ export const WhyChooseFur = () => {
     /* Story Philosophy Modal */
   }
       <AnimatePresence>
-        {showStoryModal && <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-stone-950/60 backdrop-blur-xs">
+        {showStoryModal && <div
+            onClick={(e) => {
+              if (e.target === e.currentTarget) setShowStoryModal(false);
+            }}
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-stone-950/60 dark:bg-black/75 backdrop-blur-md overflow-y-auto overscroll-contain"
+          >
             <motion.div
     initial={{ opacity: 0, scale: 0.95 }}
     animate={{ opacity: 1, scale: 1 }}
     exit={{ opacity: 0, scale: 0.95 }}
-    className="bg-white dark:bg-stone-900 max-w-lg w-full rounded-2xl p-6 sm:p-8 shadow-2xl border border-stone-200 dark:border-stone-800 relative"
+    className="bg-white dark:bg-stone-900 max-w-lg w-full max-h-[90vh] overflow-y-auto overscroll-contain rounded-2xl p-6 sm:p-8 shadow-2xl border border-stone-200 dark:border-stone-800 relative"
   >
               <button
     onClick={() => setShowStoryModal(false)}
-    className="absolute top-4 right-4 p-2 text-stone-400 hover:text-stone-700 dark:hover:text-stone-200"
+    aria-label="Close story modal"
+    className="absolute top-4 right-4 p-2 rounded-full text-stone-400 hover:text-stone-700 dark:hover:text-stone-200 hover:bg-stone-100 dark:hover:bg-stone-800 transition-colors cursor-pointer"
   >
                 <X className="w-5 h-5" />
               </button>
